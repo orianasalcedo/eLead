@@ -1,333 +1,327 @@
-# Cypress Testing Framework
+# 🧪 Cypress Testing Framework - eLead Promo
 
-A comprehensive Cypress testing framework with clear folder structure and base configuration for end-to-end testing.
+A comprehensive Cypress testing framework following industry best practices and Page Object Model pattern.
 
-## 📁 Project Structure
+---
+
+## 📁 Repository Layout (After Cleanup)
 
 ```
 cypress-framework/
 ├── cypress/
-│   ├── e2e/                    # Test files
-│   │   ├── smoke/              # Smoke tests
-│   │   ├── regression/         # Regression tests
-│   │   ├── api/                # API tests
-│   │   └── ui/                 # UI tests
-│   ├── fixtures/               # Test data files
-│   │   ├── testData.json       # Test data
-│   │   ├── products.json       # Product data
-│   │   └── config.json         # Configuration data
-│   ├── support/                # Support files
-│   │   ├── commands.js         # Custom commands
-│   │   └── e2e.js             # Global configuration
-│   ├── downloads/              # Downloaded files
-│   ├── screenshots/            # Screenshots
-│   └── videos/                 # Test videos
-├── cypress.config.js           # Cypress configuration
-├── package.json                # Dependencies and scripts
-└── README.md                   # This file
+│   ├── e2e/                      # Test specifications
+│   │   ├── api/                  # API tests (8 files)
+│   │   │   ├── api-smoke-working.cy.js
+│   │   │   ├── authentication-tests.cy.js
+│   │   │   ├── address-management-improved.cy.js
+│   │   │   ├── order-management-tests.cy.js
+│   │   │   ├── contact-form-tests.cy.js
+│   │   │   ├── page-content-simple-tests.cy.js
+│   │   │   └── product-catalog-tests.cy.js
+│   │   ├── ui/                   # UI tests (2 files - refactored)
+│   │   │   ├── product-management-refactored.cy.js
+│   │   │   └── user-authentication-refactored.cy.js
+│   │   ├── features/             # Feature tests (14 files)
+│   │   ├── smoke/                # Smoke tests (5 files)
+│   │   └── regression/           # Regression tests (1 file)
+│   ├── pages/                    # Page Objects (POM)
+│   │   ├── LoginPage.js
+│   │   ├── ProductsPage.js
+│   │   ├── RegisterPage.js
+│   │   └── components/
+│   ├── actions/                  # Business flow actions
+│   │   ├── auth.actions.js
+│   │   └── products.actions.js
+│   ├── fixtures/                 # Test data
+│   │   ├── addresses/
+│   │   ├── users/
+│   │   └── api/
+│   ├── utils/                    # Utilities & helpers
+│   │   ├── data.js
+│   │   └── address-generator.js
+│   └── support/                  # Custom commands & config
+│       ├── commands.js
+│       ├── eleadpromo-commands.js
+│       └── e2e.js
+├── docs/                         # Documentation
+│   ├── COMPLIANCE_REPORT.md
+│   ├── DATA_MANAGEMENT_GUIDE.md
+│   ├── REFACTORING_PLAN.md
+│   ├── TESTING_GUIDE.md
+│   └── XRAY_INTEGRATION_GUIDE.md
+├── scripts/                      # Utility scripts
+├── .eslintrc.json               # Linting rules
+├── .prettierrc                  # Code formatting
+├── cypress.config.js            # Cypress configuration
+├── package.json                 # Dependencies & scripts
+└── README.md                    # This file
 ```
+
+---
 
 ## 🚀 Quick Start
 
 ### Prerequisites
-
-- Node.js (version 16 or higher)
-- npm (version 8 or higher)
+- Node.js >= 16.0.0
+- npm >= 8.0.0
 
 ### Installation
-
-1. **Clone or download this framework**
-   ```bash
-   # If you have this as a repository
-   git clone <repository-url>
-   cd cypress-framework
-   ```
-
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
-
-3. **Open Cypress Test Runner**
-   ```bash
-   npm run cypress:open
-   ```
-
-4. **Run tests in headless mode**
-   ```bash
-   npm run cypress:run
-   ```
-
-## 📋 Available Scripts
-
-### Basic Commands
-- `npm run cypress:open` - Open Cypress Test Runner
-- `npm run cypress:run` - Run tests in headless mode
-- `npm run test` - Alias for cypress:run
-
-### Browser-Specific Tests
-- `npm run test:chrome` - Run tests in Chrome
-- `npm run test:firefox` - Run tests in Firefox
-- `npm run test:edge` - Run tests in Edge
-- `npm run test:headed` - Run tests with browser UI
-
-### Test Categories
-- `npm run test:smoke` - Run smoke tests only
-- `npm run test:regression` - Run regression tests only
-- `npm run test:api` - Run API tests only
-- `npm run test:ui` - Run UI tests only
-
-### Code Quality
-- `npm run lint` - Run ESLint
-- `npm run lint:fix` - Fix ESLint issues
-
-## ⚙️ Configuration
-
-### Environment Variables
-
-The framework supports multiple environments through the `cypress.config.js`:
-
-```javascript
-// Set environment via command line
-CYPRESS_ENV=staging npm run cypress:run
-
-// Or modify cypress.config.js
-env: {
-  environment: 'staging' // development, staging, production
-}
+```bash
+npm install
 ```
 
-### Base URLs
+### Run Tests
 
-- **Development**: `http://localhost:3000`
-- **Staging**: `https://staging.example.com`
-- **Production**: `https://example.com`
+#### Open Cypress Test Runner
+```bash
+# QA environment
+npm run cy:open:qa
 
-## 🛠️ Custom Commands
-
-The framework includes several custom commands in `cypress/support/commands.js`:
-
-### Authentication
-```javascript
-cy.login('email@example.com', 'password')
-cy.logout()
+# Staging environment
+npm run cy:open:stg
 ```
 
-### API Testing
-```javascript
-cy.apiRequest('GET', '/api/products')
-cy.apiRequest('POST', '/api/products', { name: 'Product' })
+#### Run Tests Headlessly
+```bash
+# Run all smoke tests in QA
+npm run cy:run:qa -- --spec "cypress/e2e/smoke/**"
+
+# Run all API tests in Staging
+npm run cy:run:stg -- --spec "cypress/e2e/api/**"
+
+# Run specific test
+npx cypress run --env environment=qa --spec "cypress/e2e/api/api-smoke-working.cy.js"
 ```
-
-### Form Handling
-```javascript
-cy.fillForm({
-  'email': 'test@example.com',
-  'password': 'password123'
-})
-```
-
-### Viewport Management
-```javascript
-cy.mobileViewport()    // 375x667
-cy.tabletViewport()   // 768x1024
-cy.desktopViewport()  // 1280x720
-cy.largeDesktopViewport() // 1920x1080
-```
-
-### Utility Commands
-```javascript
-cy.waitForElement('[data-cy="button"]')
-cy.clickByText('Submit')
-cy.elementExists('[data-cy="modal"]')
-cy.generateRandomString(10)
-```
-
-## 📊 Test Data Management
-
-### Fixtures
-
-Test data is organized in the `cypress/fixtures/` folder:
-
-- `testData.json` - User accounts, messages, API endpoints
-- `products.json` - Product information
-- `config.json` - Environment and configuration data
-
-### Using Fixtures
-
-```javascript
-describe('My Test', () => {
-  beforeEach(() => {
-    cy.fixture('testData').as('testData')
-  })
-
-  it('should use test data', () => {
-    cy.get('@testData').then((data) => {
-      cy.login(data.users.validUser.email, data.users.validUser.password)
-    })
-  })
-})
-```
-
-## 🎯 Test Organization
-
-### Smoke Tests (`cypress/e2e/smoke/`)
-Quick tests to verify basic functionality:
-- Page loads
-- Navigation works
-- Forms are accessible
-- API connectivity
-
-### UI Tests (`cypress/e2e/ui/`)
-User interface focused tests:
-- User authentication
-- Form submissions
-- Navigation flows
-- User interactions
-
-### API Tests (`cypress/e2e/api/`)
-Backend API testing:
-- CRUD operations
-- Authentication
-- Error handling
-- Data validation
-
-### Regression Tests (`cypress/e2e/regression/`)
-Comprehensive end-to-end tests:
-- Complete user journeys
-- Cross-browser compatibility
-- Error scenario handling
-- Performance testing
-
-## 🔧 Best Practices
-
-### Selectors
-Use data-cy attributes for reliable selectors:
-```html
-<button data-cy="submit-button">Submit</button>
-```
-
-### Test Structure
-```javascript
-describe('Feature Name', () => {
-  beforeEach(() => {
-    // Setup code
-  })
-
-  it('should do something specific', () => {
-    // Test steps
-  })
-})
-```
-
-### Assertions
-```javascript
-cy.get('[data-cy="element"]')
-  .should('be.visible')
-  .should('contain', 'Expected Text')
-  .should('have.attr', 'href', '/expected-url')
-```
-
-### Page Object Model
-Consider creating page objects for complex pages:
-```javascript
-// cypress/support/pages/LoginPage.js
-class LoginPage {
-  visit() {
-    cy.visit('/login')
-  }
-
-  fillCredentials(email, password) {
-    cy.get('[data-cy="email-input"]').type(email)
-    cy.get('[data-cy="password-input"]').type(password)
-  }
-
-  submit() {
-    cy.get('[data-cy="login-button"]').click()
-  }
-}
-
-export default new LoginPage()
-```
-
-## 🐛 Debugging
-
-### Debug Mode
-```javascript
-cy.debug() // Pause execution
-cy.pause() // Pause and show debugger
-```
-
-### Console Logs
-```javascript
-cy.log('Custom log message')
-cy.then(() => {
-  console.log('Debug information')
-})
-```
-
-### Screenshots
-```javascript
-cy.screenshot('test-screenshot')
-cy.takeFullPageScreenshot('full-page')
-```
-
-## 📈 Reporting
-
-### Built-in Reporter
-The framework uses the default spec reporter. For more advanced reporting, consider:
-
-- **Mochawesome**: `npm install --save-dev mochawesome mochawesome-merge mochawesome-report-generator`
-- **Cypress Dashboard**: For CI/CD integration
-- **Custom reporters**: Extend with your own reporting solution
-
-## 🚀 CI/CD Integration
-
-### GitHub Actions Example
-```yaml
-name: Cypress Tests
-on: [push, pull_request]
-jobs:
-  cypress-run:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-      - run: npm ci
-      - run: npm run cypress:run
-```
-
-### Docker Support
-```dockerfile
-FROM cypress/included:13.6.0
-WORKDIR /app
-COPY package*.json ./
-RUN npm ci
-COPY . .
-CMD ["npm", "run", "cypress:run"]
-```
-
-## 📚 Additional Resources
-
-- [Cypress Documentation](https://docs.cypress.io/)
-- [Cypress Best Practices](https://docs.cypress.io/guides/references/best-practices)
-- [Cypress Examples](https://example.cypress.io/)
-- [Cypress Real World App](https://github.com/cypress-io/cypress-realworld-app)
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Add your tests following the established patterns
-4. Run the linter: `npm run lint:fix`
-5. Submit a pull request
-
-## 📄 License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
 
 ---
 
-**Happy Testing! 🎉**
+## 📋 Available Scripts
+
+| Script | Description |
+|--------|-------------|
+| `npm run cy:open` | Open Cypress Test Runner |
+| `npm run cy:run` | Run tests headlessly |
+| `npm run cy:run:headed` | Run tests with browser visible |
+| `npm run cy:open:qa` | Open Cypress in QA environment |
+| `npm run cy:open:stg` | Open Cypress in Staging environment |
+| `npm run cy:run:qa` | Run tests in QA environment |
+| `npm run cy:run:stg` | Run tests in Staging environment |
+| `npm run cy:run:smoke` | Run smoke tests |
+| `npm run cy:run:api` | Run API tests |
+| `npm run lint` | Run ESLint |
+| `npm run lint:fix` | Fix linting issues |
+| `npm run format` | Format code with Prettier |
+| `npm run format:check` | Check code formatting |
+
+---
+
+## 🏗️ Architecture
+
+### Page Object Model (POM)
+All UI interactions are abstracted into Page Objects located in `cypress/pages/`.
+
+**Example:**
+```javascript
+// cypress/pages/LoginPage.js
+class LoginPage {
+  visit() { cy.visit('/login') }
+  getEmailInput() { return cy.get('[data-cy="email-input"]') }
+  fillEmail(email) { this.getEmailInput().clear().type(email) }
+}
+```
+
+### Actions Pattern
+Business flows are encapsulated in Actions located in `cypress/actions/`.
+
+**Example:**
+```javascript
+// cypress/actions/auth.actions.js
+const { LoginPage } = require('../pages/LoginPage')
+
+const authActions = {
+  uiLogin(email, password) {
+    const loginPage = new LoginPage()
+    loginPage.visit()
+    loginPage.fillLoginForm(email, password)
+    loginPage.submitForm()
+  }
+}
+```
+
+### Test Structure
+Tests import Actions (not Page Objects directly) and focus on assertions.
+
+**Example:**
+```javascript
+// cypress/e2e/ui/user-authentication-refactored.cy.js
+const { authActions } = require('../../actions/auth.actions')
+
+describe('Authentication', () => {
+  it('should login successfully', () => {
+    authActions.uiLogin('user@example.com', 'password')
+    cy.url().should('not.include', '/login')
+  })
+})
+```
+
+---
+
+## 🌍 Environments
+
+### Configuration
+Environments are configured in `cypress.config.js` and can be selected via:
+```bash
+--env environment=<env>
+```
+
+### Available Environments
+- **qa**: https://tienda1.qa.eleaddev.com
+- **staging**: https://aya.stg.eleaddev.com
+- **production**: (configured in PRODUCTION_URL env var)
+
+### Environment Files
+- `env.development` - QA environment
+- `env.staging` - Staging environment
+- `env.production` - Production environment
+
+---
+
+## ✅ Best Practices
+
+### 1. **Use Page Objects**
+```javascript
+❌ BAD: cy.get('[data-cy="email"]').type('test@example.com')
+✅ GOOD: loginPage.fillEmail('test@example.com')
+```
+
+### 2. **Use Actions for Business Flows**
+```javascript
+❌ BAD: Test contains cy.visit(), cy.get() calls
+✅ GOOD: Test calls authActions.uiLogin()
+```
+
+### 3. **Use Fixtures for Test Data**
+```javascript
+❌ BAD: const user = { email: 'test@example.com' }
+✅ GOOD: cy.fixture('users/admin')
+```
+
+### 4. **No Hardcoded Waits**
+```javascript
+❌ BAD: cy.wait(5000)
+✅ GOOD: cy.intercept('GET', '/api/users').as('getUsers'); cy.wait('@getUsers')
+```
+
+### 5. **Use data-cy Selectors**
+```javascript
+❌ BAD: cy.get('.btn-primary')
+✅ GOOD: cy.get('[data-cy="login-button"]')
+```
+
+---
+
+## 📚 Documentation
+
+- **[CLEANUP_PLAN.md](./CLEANUP_PLAN.md)** - Repository cleanup and organization plan
+- **[docs/COMPLIANCE_REPORT.md](./docs/COMPLIANCE_REPORT.md)** - Cypress rules compliance
+- **[docs/DATA_MANAGEMENT_GUIDE.md](./docs/DATA_MANAGEMENT_GUIDE.md)** - Test data best practices
+- **[docs/REFACTORING_PLAN.md](./docs/REFACTORING_PLAN.md)** - Refactoring strategy
+- **[docs/XRAY_INTEGRATION_GUIDE.md](./docs/XRAY_INTEGRATION_GUIDE.md)** - Xray integration
+
+---
+
+## 🔧 Development
+
+### Adding New Tests
+
+#### 1. Create Page Object (if needed)
+```bash
+# Create in cypress/pages/
+touch cypress/pages/CheckoutPage.js
+```
+
+#### 2. Create Action (if needed)
+```bash
+# Create in cypress/actions/
+touch cypress/actions/checkout.actions.js
+```
+
+#### 3. Create Test
+```bash
+# Create in appropriate folder
+touch cypress/e2e/ui/checkout.cy.js
+```
+
+### Running Linters
+```bash
+# Check for issues
+npm run lint
+
+# Auto-fix issues
+npm run lint:fix
+
+# Format code
+npm run format
+```
+
+---
+
+## 🐛 Troubleshooting
+
+### Tests Failing?
+1. Check environment configuration
+2. Verify test data in fixtures
+3. Check if Page Objects are up to date
+4. Review console errors in Cypress runner
+
+### Import Errors?
+1. Run `npm run lint` to check for broken imports
+2. Ensure Page Objects are in `cypress/pages/`
+3. Ensure Actions are in `cypress/actions/`
+
+### Environment Issues?
+1. Verify `--env environment=<env>` is set
+2. Check `cypress.config.js` for correct URLs
+3. Review environment files (`env.*`)
+
+---
+
+## 📊 Test Coverage
+
+| Category | Files | Status |
+|----------|-------|--------|
+| API Tests | 8 | ✅ Refactored |
+| UI Tests | 2 | ✅ Refactored (POM) |
+| Feature Tests | 14 | ⚠️ Need review |
+| Smoke Tests | 5 | ✅ Ready |
+| Regression Tests | 1 | ✅ Ready |
+
+---
+
+## 🤝 Contributing
+
+1. Create a feature branch
+2. Follow Page Object Model pattern
+3. Write tests using Actions
+4. Run linters before committing
+5. Update documentation if needed
+
+---
+
+## 📝 License
+
+MIT
+
+---
+
+## 📞 Support
+
+For questions or issues, refer to:
+- [Documentation](./docs/)
+- [Cleanup Plan](./CLEANUP_PLAN.md)
+- [Compliance Report](./docs/COMPLIANCE_REPORT.md)
+
+---
+
+**Last Updated**: October 18, 2025
+**Version**: 2.0.0 (Post-Cleanup)
