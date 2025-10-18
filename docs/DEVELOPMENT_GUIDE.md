@@ -5,6 +5,7 @@ Complete guide for developers contributing to the test framework.
 ---
 
 ## 📋 Table of Contents
+
 1. [Setup](#setup)
 2. [Project Structure](#project-structure)
 3. [Development Workflow](#development-workflow)
@@ -18,10 +19,12 @@ Complete guide for developers contributing to the test framework.
 ## 🔧 Setup
 
 ### Prerequisites
+
 - Node.js >= 16.0.0
 - npm >= 8.0.0
 
 ### Installation
+
 ```bash
 # Clone repository (when it has a remote)
 git clone <your-repo-url>
@@ -35,6 +38,7 @@ npx cypress verify
 ```
 
 ### Environment Setup
+
 ```bash
 # Copy environment template
 cp env.example .env
@@ -70,17 +74,20 @@ cypress-framework/
 ## 🔄 Development Workflow
 
 ### 1. Create a Branch
+
 ```bash
 git checkout -b feature/your-feature-name
 ```
 
 ### 2. Make Changes
+
 - Add Page Objects if needed
 - Add Actions if needed
 - Write tests
 - Update documentation
 
 ### 3. Validate
+
 ```bash
 # Format code
 npm run format
@@ -93,6 +100,7 @@ npm run cy:run:qa
 ```
 
 ### 4. Commit
+
 ```bash
 git add -A
 git commit -m "feat: add product search tests"
@@ -103,9 +111,11 @@ git commit -m "feat: add product search tests"
 ## 📄 Creating Page Objects
 
 ### When to Create a Page Object
+
 Create a Page Object when you need to interact with a new page or component.
 
 ### Template
+
 ```javascript
 // cypress/pages/CheckoutPage.js
 /**
@@ -150,6 +160,7 @@ module.exports = { CheckoutPage }
 ```
 
 ### Rules for Page Objects
+
 - ✅ One class per page/component
 - ✅ Methods return cy commands (chainable)
 - ✅ Only UI interactions
@@ -161,9 +172,11 @@ module.exports = { CheckoutPage }
 ## 🎯 Creating Actions
 
 ### When to Create an Action
+
 Create an Action when you have a business flow that uses Page Objects.
 
 ### Template
+
 ```javascript
 // cypress/actions/checkout.actions.js
 /**
@@ -184,7 +197,7 @@ const checkoutActions = {
     checkoutPage.fillShippingAddress(shippingAddress)
     checkoutPage.fillBillingAddress(billingAddress)
     checkoutPage.clickSubmit()
-    
+
     // Minimal assertion: flow completed
     cy.url().should('include', '/order-confirmation')
   },
@@ -196,15 +209,16 @@ const checkoutActions = {
     const productsPage = new ProductsPage()
     productsPage.visit()
     productsPage.addProductToCart(productIndex)
-    
+
     this.completeCheckout('123 Main St', '456 Oak Ave')
-  }
+  },
 }
 
 module.exports = { checkoutActions }
 ```
 
 ### Rules for Actions
+
 - ✅ Uses Page Objects (not direct cy.get())
 - ✅ Represents business flow
 - ✅ Can have minimal assertions
@@ -215,6 +229,7 @@ module.exports = { checkoutActions }
 ## 🗂️ Data Management
 
 ### Fixtures (Static Data)
+
 ```javascript
 // cypress/fixtures/users/customer.json
 {
@@ -231,6 +246,7 @@ cy.fixture('users/customer').then((user) => {
 ```
 
 ### Utils (Dynamic Data)
+
 ```javascript
 // cypress/utils/data.js
 function randomEmail(prefix = 'user') {
@@ -244,6 +260,7 @@ const email = randomEmail('test')
 ```
 
 ### Getting Real Data from API
+
 ```javascript
 // ✅ CORRECT - Get real country/state IDs
 beforeEach(() => {
@@ -266,6 +283,7 @@ it('should create address', () => {
 ## ✅ Compliance & Standards
 
 ### Code Style
+
 ```bash
 # Check linting
 npm run lint
@@ -278,7 +296,9 @@ npm run format
 ```
 
 ### Selector Policy
+
 **Priority order**:
+
 1. `[data-cy="element-id"]` (best)
 2. `[data-testid="element-id"]` (good)
 3. `[role="button"]` (acceptable)
@@ -287,6 +307,7 @@ npm run format
 6. `:nth-child()` (never)
 
 ### Import Rules
+
 ```javascript
 // ✅ Tests import Actions (not Pages directly)
 const { authActions } = require('../../actions/auth.actions')
@@ -305,27 +326,32 @@ const { LoginPage } = require('../pages/LoginPage')
 ### Step-by-Step
 
 #### 1. Identify what you need
+
 - Page interactions? → Need Page Object
 - Business flow? → Need Action
 - Test data? → Need Fixture or Util
 
 #### 2. Create Page Object (if UI test)
+
 ```bash
 touch cypress/pages/NewFeaturePage.js
 ```
 
 #### 3. Create Action (if complex flow)
+
 ```bash
 touch cypress/actions/newFeature.actions.js
 ```
 
 #### 4. Create Fixture (if static data)
+
 ```bash
 mkdir -p cypress/fixtures/newFeature
 touch cypress/fixtures/newFeature/data.json
 ```
 
 #### 5. Write Test
+
 ```bash
 touch cypress/e2e/features/new-feature.cy.js
 ```
@@ -342,6 +368,7 @@ describe('New Feature', () => {
 ```
 
 #### 6. Validate
+
 ```bash
 npm run format
 npm run lint
@@ -353,6 +380,7 @@ npm run cy:run:qa -- --spec "cypress/e2e/features/new-feature.cy.js"
 ## 📊 Quality Checklist
 
 Before merging:
+
 - [ ] Code formatted (`npm run format`)
 - [ ] Linting passes (`npm run lint`)
 - [ ] Uses Page Objects (if UI)
@@ -366,18 +394,21 @@ Before merging:
 ## 🔍 Debugging
 
 ### Cypress Debug Mode
+
 ```bash
 # Open Cypress with debug
 DEBUG=cypress:* npm run cy:open:qa
 ```
 
 ### Console Logs in Tests
+
 ```javascript
 cy.log('Custom message')
 cy.task('log', 'Message in terminal')
 ```
 
 ### Take Screenshots
+
 ```javascript
 cy.screenshot('debug-screenshot')
 ```
@@ -405,4 +436,3 @@ cy.screenshot('debug-screenshot')
 ---
 
 **Questions?** Check the documentation or ask the team!
-

@@ -2,6 +2,7 @@
 
 Every interactive element must have data-testid (or data-cy).
 Format: kebab-case, stable, not business copy. Examples:
+
 - login-submit
 - order-row
 - toast-error

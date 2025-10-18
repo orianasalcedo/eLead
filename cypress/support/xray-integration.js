@@ -5,9 +5,9 @@
 
 class XrayIntegration {
   constructor() {
-    this.testResults = new Map();
-    this.currentTestId = null;
-    this.testStartTime = null;
+    this.testResults = new Map()
+    this.currentTestId = null
+    this.testStartTime = null
   }
 
   /**
@@ -16,11 +16,11 @@ class XrayIntegration {
    * @param {string} testName - Test name
    */
   startTest(testId, testName) {
-    this.currentTestId = testId;
-    this.testStartTime = new Date();
-    
-    cy.log(`Starting Xray Test: ${testId} - ${testName}`);
-    
+    this.currentTestId = testId
+    this.testStartTime = new Date()
+
+    cy.log(`Starting Xray Test: ${testId} - ${testName}`)
+
     // Store test metadata
     this.testResults.set(testId, {
       testId,
@@ -28,8 +28,8 @@ class XrayIntegration {
       startTime: this.testStartTime,
       status: 'RUNNING',
       steps: [],
-      attachments: []
-    });
+      attachments: [],
+    })
   }
 
   /**
@@ -40,19 +40,19 @@ class XrayIntegration {
    */
   addTestStep(stepDescription, expectedResult, passed = true) {
     if (!this.currentTestId) {
-      cy.log('Warning: No active test. Call startTest() first.');
-      return;
+      cy.log('Warning: No active test. Call startTest() first.')
+      return
     }
 
-    const testData = this.testResults.get(this.currentTestId);
+    const testData = this.testResults.get(this.currentTestId)
     testData.steps.push({
       description: stepDescription,
       expectedResult,
       passed,
-      timestamp: new Date()
-    });
+      timestamp: new Date(),
+    })
 
-    cy.log(`Step: ${stepDescription} - ${passed ? 'PASSED' : 'FAILED'}`);
+    cy.log(`Step: ${stepDescription} - ${passed ? 'PASSED' : 'FAILED'}`)
   }
 
   /**
@@ -60,7 +60,7 @@ class XrayIntegration {
    * @param {string} comment - Optional comment
    */
   passTest(comment = '') {
-    this.finishTest('PASSED', comment);
+    this.finishTest('PASSED', comment)
   }
 
   /**
@@ -69,7 +69,7 @@ class XrayIntegration {
    * @param {string} comment - Optional comment
    */
   failTest(error, comment = '') {
-    this.finishTest('FAILED', comment, error);
+    this.finishTest('FAILED', comment, error)
   }
 
   /**
@@ -77,7 +77,7 @@ class XrayIntegration {
    * @param {string} reason - Reason for skipping
    */
   skipTest(reason = '') {
-    this.finishTest('SKIPPED', reason);
+    this.finishTest('SKIPPED', reason)
   }
 
   /**
@@ -88,22 +88,22 @@ class XrayIntegration {
    */
   finishTest(status, comment = '', error = '') {
     if (!this.currentTestId) {
-      cy.log('Warning: No active test to finish.');
-      return;
+      cy.log('Warning: No active test to finish.')
+      return
     }
 
-    const testData = this.testResults.get(this.currentTestId);
-    testData.status = status;
-    testData.endTime = new Date();
-    testData.duration = testData.endTime - testData.startTime;
-    testData.comment = comment;
-    testData.error = error;
+    const testData = this.testResults.get(this.currentTestId)
+    testData.status = status
+    testData.endTime = new Date()
+    testData.duration = testData.endTime - testData.startTime
+    testData.comment = comment
+    testData.error = error
 
-    cy.log(`Finished Xray Test: ${this.currentTestId} - ${status}`);
-    
+    cy.log(`Finished Xray Test: ${this.currentTestId} - ${status}`)
+
     // Reset current test
-    this.currentTestId = null;
-    this.testStartTime = null;
+    this.currentTestId = null
+    this.testStartTime = null
   }
 
   /**
@@ -114,19 +114,19 @@ class XrayIntegration {
    */
   addAttachment(filename, contentType, data) {
     if (!this.currentTestId) {
-      cy.log('Warning: No active test. Call startTest() first.');
-      return;
+      cy.log('Warning: No active test. Call startTest() first.')
+      return
     }
 
-    const testData = this.testResults.get(this.currentTestId);
+    const testData = this.testResults.get(this.currentTestId)
     testData.attachments.push({
       filename,
       contentType,
       data,
-      timestamp: new Date()
-    });
+      timestamp: new Date(),
+    })
 
-    cy.log(`Added attachment: ${filename}`);
+    cy.log(`Added attachment: ${filename}`)
   }
 
   /**
@@ -134,7 +134,7 @@ class XrayIntegration {
    * @returns {Map} Map of test results
    */
   getAllResults() {
-    return this.testResults;
+    return this.testResults
   }
 
   /**
@@ -143,7 +143,7 @@ class XrayIntegration {
    * @returns {Object} Test result data
    */
   getTestResult(testId) {
-    return this.testResults.get(testId);
+    return this.testResults.get(testId)
   }
 
   /**
@@ -151,8 +151,8 @@ class XrayIntegration {
    * @returns {Object} Test execution report
    */
   generateExecutionReport() {
-    const results = Array.from(this.testResults.values());
-    
+    const results = Array.from(this.testResults.values())
+
     return {
       testExecutionKey: `EXEC-${Date.now()}`,
       info: {
@@ -162,28 +162,28 @@ class XrayIntegration {
         user: 'cypress-automation',
         revision: '1',
         startDate: new Date().toISOString(),
-        finishDate: new Date().toISOString()
+        finishDate: new Date().toISOString(),
       },
-      tests: results.map(test => ({
+      tests: results.map((test) => ({
         testKey: test.testId,
         status: test.status,
         comment: test.comment || '',
         executedBy: 'cypress-automation',
         executedOn: test.endTime?.toISOString() || new Date().toISOString(),
         duration: test.duration || 0,
-        steps: test.steps.map(step => ({
+        steps: test.steps.map((step) => ({
           status: step.passed ? 'PASSED' : 'FAILED',
           comment: step.description,
-          actualResult: step.expectedResult
+          actualResult: step.expectedResult,
         })),
         defects: test.error ? [test.error] : [],
-        evidence: test.attachments.map(att => ({
+        evidence: test.attachments.map((att) => ({
           filename: att.filename,
           contentType: att.contentType,
-          data: att.data
-        }))
-      }))
-    };
+          data: att.data,
+        })),
+      })),
+    }
   }
 
   /**
@@ -193,24 +193,24 @@ class XrayIntegration {
    * @param {string} clientSecret - Xray client secret
    */
   async uploadToXray(xrayUrl, clientId, clientSecret) {
-    const report = this.generateExecutionReport();
-    
+    const report = this.generateExecutionReport()
+
     try {
       const response = await cy.request({
         method: 'POST',
         url: `${xrayUrl}/api/v2/import/execution`,
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${await this.getXrayToken(clientId, clientSecret)}`
+          Authorization: `Bearer ${await this.getXrayToken(clientId, clientSecret)}`,
         },
-        body: report
-      });
+        body: report,
+      })
 
-      cy.log(`Test results uploaded to Xray: ${response.body.testExecutionKey}`);
-      return response.body;
+      cy.log(`Test results uploaded to Xray: ${response.body.testExecutionKey}`)
+      return response.body
     } catch (error) {
-      cy.log(`Failed to upload to Xray: ${error.message}`);
-      throw error;
+      cy.log(`Failed to upload to Xray: ${error.message}`)
+      throw error
     }
   }
 
@@ -226,49 +226,52 @@ class XrayIntegration {
       url: 'https://xray.cloud.getxray.app/api/v2/authenticate',
       body: {
         client_id: clientId,
-        client_secret: clientSecret
-      }
-    });
+        client_secret: clientSecret,
+      },
+    })
 
-    return response.body;
+    return response.body
   }
 }
 
 // Create global instance
-const xrayIntegration = new XrayIntegration();
+const xrayIntegration = new XrayIntegration()
 
 // Make it available globally
 Cypress.Commands.add('xrayStartTest', (testId, testName) => {
-  xrayIntegration.startTest(testId, testName);
-});
+  xrayIntegration.startTest(testId, testName)
+})
 
-Cypress.Commands.add('xrayAddStep', (description, expectedResult, passed = true) => {
-  xrayIntegration.addTestStep(description, expectedResult, passed);
-});
+Cypress.Commands.add(
+  'xrayAddStep',
+  (description, expectedResult, passed = true) => {
+    xrayIntegration.addTestStep(description, expectedResult, passed)
+  },
+)
 
 Cypress.Commands.add('xrayPassTest', (comment = '') => {
-  xrayIntegration.passTest(comment);
-});
+  xrayIntegration.passTest(comment)
+})
 
 Cypress.Commands.add('xrayFailTest', (error, comment = '') => {
-  xrayIntegration.failTest(error, comment);
-});
+  xrayIntegration.failTest(error, comment)
+})
 
 Cypress.Commands.add('xraySkipTest', (reason = '') => {
-  xrayIntegration.skipTest(reason);
-});
+  xrayIntegration.skipTest(reason)
+})
 
 Cypress.Commands.add('xrayAddAttachment', (filename, contentType, data) => {
-  xrayIntegration.addAttachment(filename, contentType, data);
-});
+  xrayIntegration.addAttachment(filename, contentType, data)
+})
 
 Cypress.Commands.add('xrayUploadResults', (xrayUrl, clientId, clientSecret) => {
-  return xrayIntegration.uploadToXray(xrayUrl, clientId, clientSecret);
-});
+  return xrayIntegration.uploadToXray(xrayUrl, clientId, clientSecret)
+})
 
 Cypress.Commands.add('xrayGetResults', () => {
-  return xrayIntegration.getAllResults();
-});
+  return xrayIntegration.getAllResults()
+})
 
 // Export for use in other files
-module.exports = XrayIntegration;
+module.exports = XrayIntegration

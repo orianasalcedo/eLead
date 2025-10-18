@@ -67,7 +67,8 @@ describe('User Authentication Tests - Refactored', () => {
 
     // ✅ Uses Page Object for assertions
     const registerPage = new RegisterPage()
-    registerPage.getSuccessMessage().should('contain', 'Registration successful')
+    registerPage
+      .getSuccessMessage()
+      .should('contain', 'Registration successful')
   })
 })
-

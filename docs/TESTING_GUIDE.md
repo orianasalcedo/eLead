@@ -5,6 +5,7 @@ Complete guide for writing and running tests.
 ---
 
 ## 📋 Table of Contents
+
 1. [Quick Start](#quick-start)
 2. [Running Tests](#running-tests)
 3. [Writing Tests](#writing-tests)
@@ -19,11 +20,13 @@ Complete guide for writing and running tests.
 ## 🚀 Quick Start
 
 ### Installation
+
 ```bash
 npm install
 ```
 
 ### Run Your First Test
+
 ```bash
 # Open Cypress in QA
 npm run cy:open:qa
@@ -37,6 +40,7 @@ npm run cy:run:smoke
 ## 🎮 Running Tests
 
 ### Interactive Mode (Cypress Test Runner)
+
 ```bash
 # QA environment
 npm run cy:open:qa
@@ -46,6 +50,7 @@ npm run cy:open:stg
 ```
 
 ### Headless Mode (CI/CD)
+
 ```bash
 # Run all tests in QA
 npm run cy:run:qa
@@ -61,6 +66,7 @@ npx cypress run --env environment=qa --spec "cypress/e2e/api/api-smoke-working.c
 ```
 
 ### Available Environments
+
 - **qa**: https://tienda1.qa.eleaddev.com
 - **staging**: https://aya.stg.eleaddev.com
 
@@ -69,6 +75,7 @@ npx cypress run --env environment=qa --spec "cypress/e2e/api/api-smoke-working.c
 ## ✍️ Writing Tests
 
 ### Directory Structure
+
 ```
 cypress/e2e/
 ├── api/           # API tests (no UI interaction)
@@ -79,6 +86,7 @@ cypress/e2e/
 ```
 
 ### Test Naming Convention
+
 ```javascript
 // ✅ GOOD
 it('should display product list when user visits products page', () => {})
@@ -92,9 +100,11 @@ it('test1', () => {})
 ## 🏗️ Page Object Model
 
 ### What is a Page Object?
+
 A Page Object is a class that encapsulates all interactions with a specific page.
 
 ### Creating a Page Object
+
 ```javascript
 // cypress/pages/ProductsPage.js
 class ProductsPage {
@@ -126,6 +136,7 @@ module.exports = { ProductsPage }
 ```
 
 ### Rules for Page Objects
+
 - ✅ One class per page/component
 - ✅ Methods return `cy` commands (chainable)
 - ✅ NO assertions in Page Objects
@@ -137,9 +148,11 @@ module.exports = { ProductsPage }
 ## 🎯 Actions Pattern
 
 ### What is an Action?
+
 An Action is a business flow that uses Page Objects.
 
 ### Creating an Action
+
 ```javascript
 // cypress/actions/products.actions.js
 const { ProductsPage } = require('../pages/ProductsPage')
@@ -150,13 +163,14 @@ const productsActions = {
     productsPage.visit()
     productsPage.typeInSearch(searchTerm)
     productsPage.clickSearchButton()
-  }
+  },
 }
 
 module.exports = { productsActions }
 ```
 
 ### Rules for Actions
+
 - ✅ Uses Page Objects (never direct cy.get())
 - ✅ Represents a business flow
 - ✅ Minimal assertions (URL, visibility)
@@ -167,6 +181,7 @@ module.exports = { productsActions }
 ## 📦 Fixtures & Test Data
 
 ### Fixture Structure
+
 ```
 cypress/fixtures/
 ├── users/
@@ -182,6 +197,7 @@ cypress/fixtures/
 ```
 
 ### Using Fixtures
+
 ```javascript
 // Load fixture
 cy.fixture('users/admin').then((user) => {
@@ -193,6 +209,7 @@ cy.intercept('GET', '/api/orders', { fixture: 'api/orders/list.json' })
 ```
 
 ### Dynamic Data (Utils)
+
 ```javascript
 // cypress/utils/address-generator.js
 const { randomEmail } = require('../../utils/data')
@@ -206,6 +223,7 @@ const address = createShippingAddress(realCountryId, realStateId)
 ```
 
 ### Data Management Rules
+
 - ✅ Use fixtures for **static** base data
 - ✅ Use utils for **dynamic** data generation
 - ✅ Get **real IDs** from API (not hardcoded)
@@ -216,6 +234,7 @@ const address = createShippingAddress(realCountryId, realStateId)
 ## 📝 Test Structure (Correct Pattern)
 
 ### ✅ CORRECT - Uses Actions + Page Objects
+
 ```javascript
 // cypress/e2e/ui/product-search.cy.js
 const { productsActions } = require('../../actions/products.actions')
@@ -234,11 +253,12 @@ describe('Product Search', () => {
 ```
 
 ### ❌ INCORRECT - Direct cy.get() calls
+
 ```javascript
 // ❌ BAD - Violates Page Object Model
 it('should find products', () => {
-  cy.visit('/products')                   // ❌ Direct
-  cy.get('[data-cy="search"]').type('laptop')  // ❌ Direct
+  cy.visit('/products') // ❌ Direct
+  cy.get('[data-cy="search"]').type('laptop') // ❌ Direct
   cy.get('[data-cy="results"]').should('be.visible')
 })
 ```
@@ -248,6 +268,7 @@ it('should find products', () => {
 ## 🎯 Best Practices
 
 ### 1. Selectors
+
 ```javascript
 ✅ GOOD: cy.get('[data-cy="login-button"]')
 ✅ GOOD: cy.get('[data-testid="email-input"]')
@@ -256,16 +277,18 @@ it('should find products', () => {
 ```
 
 ### 2. Waits
+
 ```javascript
-✅ GOOD: 
+✅ GOOD:
 cy.intercept('GET', '/api/users').as('getUsers')
 cy.wait('@getUsers').its('response.statusCode').should('eq', 200)
 
-❌ BAD:  
+❌ BAD:
 cy.wait(5000)  // Never use arbitrary waits!
 ```
 
 ### 3. Test Isolation
+
 ```javascript
 ✅ GOOD:
 beforeEach(() => {
@@ -279,6 +302,7 @@ beforeEach(() => {
 ```
 
 ### 4. Assertions
+
 ```javascript
 ✅ GOOD:
 productsPage.getProductList().should('be.visible')
@@ -293,6 +317,7 @@ expect(products.length).to.be.greaterThan(0)  // Use Cypress assertions
 ## 🔧 Custom Commands
 
 ### Available Commands
+
 ```javascript
 // Authentication
 cy.eleadpromoLogin(email, password)
@@ -304,15 +329,16 @@ cy.authenticatedApiRequest(method, endpoint, body)
 
 // Data helpers
 cy.getRealCountryAndState()
-cy.dataCy('element-id')  // Same as cy.get('[data-cy="element-id"]')
+cy.dataCy('element-id') // Same as cy.get('[data-cy="element-id"]')
 ```
 
 ### Using Custom Commands
+
 ```javascript
 it('should access authenticated endpoint', () => {
   cy.eleadpromoLogin('user@example.com', 'password')
   cy.getRealCountryAndState()
-  
+
   cy.get('@realCountryId').then((countryId) => {
     cy.authenticatedApiRequest('GET', `/api/v1/countries/${countryId}`)
   })
@@ -324,24 +350,28 @@ it('should access authenticated endpoint', () => {
 ## 📊 Test Categories
 
 ### API Tests (`cypress/e2e/api/`)
+
 - Test backend endpoints
 - No UI interaction
 - Focus on response structure, status codes
 - Example: `api-smoke-working.cy.js`
 
 ### UI Tests (`cypress/e2e/ui/`)
+
 - Test user interface
 - **MUST use Page Objects + Actions**
 - Focus on user interactions
 - Example: `product-management-refactored.cy.js`
 
 ### Smoke Tests (`cypress/e2e/smoke/`)
+
 - Quick health checks
 - Run before deployments
 - Critical path only
 - Example: `login.cy.js`
 
 ### Feature Tests (`cypress/e2e/features/`)
+
 - Feature-specific scenarios
 - Can be UI or API
 - Based on requirements
@@ -352,12 +382,14 @@ it('should access authenticated endpoint', () => {
 ## 🐛 Troubleshooting
 
 ### Tests Failing?
+
 1. **Check environment**: `--env environment=qa`
 2. **Check baseUrl**: Verify in `cypress.config.js`
 3. **Check test data**: Verify fixtures exist
 4. **Check selectors**: Ensure Page Objects are updated
 
 ### Import Errors?
+
 ```bash
 # Check for broken imports
 npm run lint
@@ -368,6 +400,7 @@ const { LoginPage } = require('./pages/LoginPage')   // ❌
 ```
 
 ### Linting Errors?
+
 ```bash
 # Auto-fix most issues
 npm run lint:fix
@@ -377,6 +410,7 @@ npm run format
 ```
 
 ### Environment Issues?
+
 ```bash
 # Verify environment is set
 npx cypress run --env environment=qa
@@ -398,6 +432,7 @@ cat cypress.config.js | grep -A 5 "if (envName === 'qa')"
 ## ✅ Checklist for New Tests
 
 Before committing a new test:
+
 - [ ] Uses Page Objects (if UI test)
 - [ ] Uses Actions (if business flow)
 - [ ] Uses fixtures for test data
@@ -410,4 +445,3 @@ Before committing a new test:
 ---
 
 **For more details, see `README.md` or individual Page Objects/Actions files.**
-

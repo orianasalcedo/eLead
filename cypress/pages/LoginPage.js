@@ -9,7 +9,7 @@ class LoginPage {
     cy.visit('/login')
   }
 
-  // Form Elements  
+  // Form Elements
   getEmailInput() {
     return cy.get('[data-cy="email-input"]')
   }

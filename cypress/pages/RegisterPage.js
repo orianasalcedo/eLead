@@ -78,4 +78,3 @@ class RegisterPage {
 }
 
 module.exports = { RegisterPage }
-

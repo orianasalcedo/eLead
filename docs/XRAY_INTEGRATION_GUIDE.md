@@ -52,6 +52,7 @@ XRAY_MAX_FILE_SIZE=10
 ### 2. Test Case ID Format
 
 Ensure your test cases follow the expected ID format:
+
 - `ELP-1234` (e.g., ELP-4190)
 - `TEST-1234` (e.g., TEST-001)
 - `TC-1234` (e.g., TC-001)
@@ -64,84 +65,102 @@ Ensure your test cases follow the expected ID format:
 describe('Address Management', () => {
   it('Dropdown Shows Only Saved Addresses When Admin Addresses Not Configured', () => {
     // Start Xray test tracking
-    cy.xrayStartTest('ELP-4190', 'Dropdown Shows Only Saved Addresses When Admin Addresses Not Configured');
-    
+    cy.xrayStartTest(
+      'ELP-4190',
+      'Dropdown Shows Only Saved Addresses When Admin Addresses Not Configured',
+    )
+
     // Test step 1: Navigate to checkout page
     cy.xrayAddStep(
       'Navigate to checkout page',
       'Checkout page loads successfully',
-      true
-    );
-    cy.visit('/checkout');
-    cy.url().should('include', '/checkout');
-    
+      true,
+    )
+    cy.visit('/checkout')
+    cy.url().should('include', '/checkout')
+
     // Test step 2: Verify dropdown is visible
     cy.xrayAddStep(
       'Verify address dropdown is visible',
       'Address dropdown is displayed on the page',
-      true
-    );
-    cy.get('[data-testid="address-dropdown"]').should('be.visible');
-    
+      true,
+    )
+    cy.get('[data-testid="address-dropdown"]').should('be.visible')
+
     // Pass the test
-    cy.xrayPassTest('All address dropdown functionality working as expected');
-  });
-});
+    cy.xrayPassTest('All address dropdown functionality working as expected')
+  })
+})
 ```
 
 ### Available Commands
 
 #### `cy.xrayStartTest(testId, testName)`
+
 Starts tracking a test case in Xray.
 
 **Parameters:**
+
 - `testId` (string): Xray test case ID (e.g., 'ELP-4190')
 - `testName` (string): Test name/description
 
 #### `cy.xrayAddStep(description, expectedResult, passed)`
+
 Adds a test step to the current test.
 
 **Parameters:**
+
 - `description` (string): Step description
 - `expectedResult` (string): Expected result
 - `passed` (boolean): Whether the step passed (default: true)
 
 #### `cy.xrayPassTest(comment)`
+
 Marks the current test as passed.
 
 **Parameters:**
+
 - `comment` (string): Optional comment about the test result
 
 #### `cy.xrayFailTest(error, comment)`
+
 Marks the current test as failed.
 
 **Parameters:**
+
 - `error` (string): Error message or reason for failure
 - `comment` (string): Optional comment about the test result
 
 #### `cy.xraySkipTest(reason)`
+
 Marks the current test as skipped.
 
 **Parameters:**
+
 - `reason` (string): Reason for skipping the test
 
 #### `cy.xrayAddAttachment(filename, contentType, data)`
+
 Adds an attachment to the current test.
 
 **Parameters:**
+
 - `filename` (string): Name of the file
 - `contentType` (string): MIME type
 - `data` (string): File data (base64 encoded)
 
 #### `cy.xrayUploadResults(xrayUrl, clientId, clientSecret)`
+
 Uploads test results to Xray.
 
 **Parameters:**
+
 - `xrayUrl` (string): Xray API URL
 - `clientId` (string): Xray client ID
 - `clientSecret` (string): Xray client secret
 
 #### `cy.xrayGetResults()`
+
 Gets all test results from the current session.
 
 ## Generated Test Files
@@ -178,16 +197,19 @@ cypress/e2e/features/
 ## Running Tests
 
 ### Run All Feature Tests
+
 ```bash
 npx cypress run --spec "cypress/e2e/features/**/*.cy.js"
 ```
 
 ### Run Specific Feature Tests
+
 ```bash
 npx cypress run --spec "cypress/e2e/features/address-management.cy.js"
 ```
 
 ### Run Tests with Xray Integration
+
 ```bash
 XRAY_AUTO_UPLOAD=true npx cypress run --spec "cypress/e2e/features/**/*.cy.js"
 ```
@@ -195,15 +217,19 @@ XRAY_AUTO_UPLOAD=true npx cypress run --spec "cypress/e2e/features/**/*.cy.js"
 ## Test Results
 
 ### Local Results
+
 Test results are stored locally and can be accessed using:
+
 ```javascript
 cy.xrayGetResults().then((results) => {
-  console.log('Test Results:', results);
-});
+  console.log('Test Results:', results)
+})
 ```
 
 ### Xray Upload
+
 Results can be uploaded to Xray automatically or manually:
+
 ```javascript
 // Automatic upload (if XRAY_AUTO_UPLOAD=true)
 // Results are uploaded automatically after test completion
@@ -212,8 +238,8 @@ Results can be uploaded to Xray automatically or manually:
 cy.xrayUploadResults(
   'https://your-xray-instance.com',
   'your-client-id',
-  'your-client-secret'
-);
+  'your-client-secret',
+)
 ```
 
 ## Configuration
@@ -223,11 +249,13 @@ cy.xrayUploadResults(
 The integration supports both Xray Cloud and Xray Server:
 
 **Xray Cloud:**
+
 - Uses OAuth 2.0 authentication
 - Requires client ID and client secret
 - Base URL: `https://xray.cloud.getxray.app/api/v2`
 
 **Xray Server:**
+
 - Uses basic authentication
 - Requires username and password
 - Base URL: Your Jira instance URL
@@ -242,9 +270,9 @@ const xrayConfig = {
   execution: {
     keyPrefix: 'CUSTOM-EXEC',
     environment: 'Staging',
-    version: '2.0'
-  }
-};
+    version: '2.0',
+  },
+}
 ```
 
 ## Troubleshooting
@@ -269,6 +297,7 @@ const xrayConfig = {
 ### Debug Mode
 
 Enable debug mode by setting:
+
 ```bash
 DEBUG=xray:* npx cypress run
 ```
@@ -284,6 +313,7 @@ DEBUG=xray:* npx cypress run
 ## Support
 
 For issues and questions:
+
 1. Check the troubleshooting section above
 2. Review the Xray API documentation
 3. Check Cypress documentation for command usage

@@ -7,16 +7,23 @@ describe('Orders', () => {
   })
 
   it('shows empty state', () => {
-    cy.intercept('GET', '/api/orders*', { statusCode: 200, body: [] }).as('empty')
+    cy.intercept('GET', '/api/orders*', { statusCode: 200, body: [] }).as(
+      'empty',
+    )
     cy.visit('/orders')
     cy.wait('@empty')
     cy.contains('No orders yet').should('be.visible')
   })
 
   it('shows friendly error on 500', () => {
-    cy.intercept('GET', '/api/orders*', { statusCode: 500, body: { message: 'Internal error' } }).as('fail')
+    cy.intercept('GET', '/api/orders*', {
+      statusCode: 500,
+      body: { message: 'Internal error' },
+    }).as('fail')
     cy.visit('/orders')
     cy.wait('@fail')
-    cy.dataTest('toast-error').should('be.visible').and('contain', 'Something went wrong')
+    cy.dataTest('toast-error')
+      .should('be.visible')
+      .and('contain', 'Something went wrong')
   })
 })

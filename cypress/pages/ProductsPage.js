@@ -79,4 +79,3 @@ class ProductsPage {
 }
 
 module.exports = { ProductsPage }
-

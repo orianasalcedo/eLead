@@ -1,7 +1,7 @@
 /**
  * eLead Promo Domain-Specific Custom Commands
  * Rule 04: Custom Commands
- * 
+ *
  * These commands are specific to eLead Promo business logic
  */
 
@@ -18,21 +18,23 @@ Cypress.Commands.add('eleadpromoLogin', (email, password) => {
     },
   }
 
-  return cy.apiRequest('POST', '/api/v1/customers/sign_in', signinData).then((response) => {
-    if (response.status === 200) {
-      // Store auth headers for subsequent requests
-      cy.wrap(response.headers['access-token']).as('accessToken')
-      cy.wrap(response.headers['client']).as('client')
-      cy.wrap(response.headers['uid']).as('uid')
-      cy.wrap(response.headers['token-type']).as('tokenType')
-      cy.wrap(response.headers['expiry']).as('expiry')
+  return cy
+    .apiRequest('POST', '/api/v1/customers/sign_in', signinData)
+    .then((response) => {
+      if (response.status === 200) {
+        // Store auth headers for subsequent requests
+        cy.wrap(response.headers['access-token']).as('accessToken')
+        cy.wrap(response.headers['client']).as('client')
+        cy.wrap(response.headers['uid']).as('uid')
+        cy.wrap(response.headers['token-type']).as('tokenType')
+        cy.wrap(response.headers['expiry']).as('expiry')
 
-      cy.log('✅ eLead Promo login successful')
-      return cy.wrap(response)
-    } else {
-      throw new Error(`Login failed with status ${response.status}`)
-    }
-  })
+        cy.log('✅ eLead Promo login successful')
+        return cy.wrap(response)
+      } else {
+        throw new Error(`Login failed with status ${response.status}`)
+      }
+    })
 })
 
 /**
@@ -61,7 +63,7 @@ Cypress.Commands.add(
         },
       })
     })
-  }
+  },
 )
 
 /**
@@ -79,7 +81,11 @@ Cypress.Commands.add('getRealCountryAndState', () => {
     return cy
       .apiRequest('GET', '/api/v1/countries', null, { headers: authHeaders })
       .then((response) => {
-        if (response.status === 200 && response.body.data && response.body.data.length > 0) {
+        if (
+          response.status === 200 &&
+          response.body.data &&
+          response.body.data.length > 0
+        ) {
           const countryId = response.body.data[0].id
           cy.wrap(countryId).as('realCountryId')
           cy.log(`✅ Using real country ID: ${countryId}`)
@@ -126,4 +132,3 @@ Cypress.Commands.add('logout', () => {
 Cypress.Commands.add('dataCy', (id) => {
   return cy.get(`[data-cy="${id}"]`)
 })
-

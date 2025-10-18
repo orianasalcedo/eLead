@@ -1,6 +1,6 @@
 import 'cypress-mochawesome-reporter/register'
 import './commands'
-import './eleadpromo-commands'  // ✅ Domain-specific commands
+import './eleadpromo-commands' // ✅ Domain-specific commands
 // Optional: cypress-grep
 // require('cypress-grep')()
 // Optional: cypress-axe

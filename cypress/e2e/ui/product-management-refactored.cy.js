@@ -61,4 +61,3 @@ describe('Product Management Tests - Refactored', () => {
     productsPage.getProductDetails().should('be.visible')
   })
 })
-

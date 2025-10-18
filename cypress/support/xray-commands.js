@@ -74,7 +74,7 @@ Cypress.Commands.add('xrayCreateExecution', (testPlanKey, summary) => {
   cy.task('xray:createTestExecution', {
     testPlanKey,
     summary,
-    description: `Automated test execution created on ${new Date().toISOString()}`
+    description: `Automated test execution created on ${new Date().toISOString()}`,
   })
 })
 
@@ -84,12 +84,15 @@ Cypress.Commands.add('xrayCreateExecution', (testPlanKey, summary) => {
  * @param {string} testCaseId - Test case ID
  * @param {string} status - Test status (PASS, FAIL, EXECUTING, TODO)
  */
-Cypress.Commands.add('xrayUpdateResult', (testExecutionKey, testCaseId, status) => {
-  cy.task('xray:updateTestResult', {
-    testExecutionKey,
-    testCaseId,
-    status,
-    comment: Cypress.env('xrayComments')?.join('\n') || '',
-    evidence: Cypress.env('xrayEvidence') || []
-  })
-})
+Cypress.Commands.add(
+  'xrayUpdateResult',
+  (testExecutionKey, testCaseId, status) => {
+    cy.task('xray:updateTestResult', {
+      testExecutionKey,
+      testCaseId,
+      status,
+      comment: Cypress.env('xrayComments')?.join('\n') || '',
+      evidence: Cypress.env('xrayEvidence') || [],
+    })
+  },
+)
