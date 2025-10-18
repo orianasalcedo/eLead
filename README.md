@@ -222,11 +222,16 @@ Environments are configured in `cypress.config.js` and can be selected via:
 
 ## 📚 Documentation
 
-- **[CLEANUP_PLAN.md](./CLEANUP_PLAN.md)** - Repository cleanup and organization plan
-- **[docs/COMPLIANCE_REPORT.md](./docs/COMPLIANCE_REPORT.md)** - Cypress rules compliance
-- **[docs/DATA_MANAGEMENT_GUIDE.md](./docs/DATA_MANAGEMENT_GUIDE.md)** - Test data best practices
-- **[docs/REFACTORING_PLAN.md](./docs/REFACTORING_PLAN.md)** - Refactoring strategy
-- **[docs/XRAY_INTEGRATION_GUIDE.md](./docs/XRAY_INTEGRATION_GUIDE.md)** - Xray integration
+### Essential Guides
+- **[TESTING_GUIDE.md](./docs/TESTING_GUIDE.md)** - How to write and run tests
+- **[DEVELOPMENT_GUIDE.md](./docs/DEVELOPMENT_GUIDE.md)** - Development workflow and standards
+- **[API_REFERENCE.md](./docs/API_REFERENCE.md)** - API endpoints and examples
+
+### Reference
+- **[CHANGELOG.md](./CHANGELOG.md)** - Project history and changes
+- **[COMPLIANCE_REPORT.md](./docs/COMPLIANCE_REPORT.md)** - Cypress rules compliance
+- **[PRODUCT_REQUIREMENTS.md](./docs/PRODUCT_REQUIREMENTS.md)** - Business requirements
+- **[XRAY_INTEGRATION_GUIDE.md](./docs/XRAY_INTEGRATION_GUIDE.md)** - Xray integration (if needed)
 
 ---
 
