@@ -1,0 +1,62 @@
+{
+  "users": {
+    "validUser": {
+      "email": "test@example.com",
+      "password": "password123",
+      "firstName": "John",
+      "lastName": "Doe",
+      "phone": "+1234567890"
+    },
+    "adminUser": {
+      "email": "admin@example.com",
+      "password": "admin123",
+      "firstName": "Admin",
+      "lastName": "User",
+      "role": "admin"
+    },
+    "invalidUser": {
+      "email": "invalid@example.com",
+      "password": "wrongpassword"
+    }
+  },
+  "products": {
+    "validProduct": {
+      "name": "Test Product",
+      "description": "This is a test product",
+      "price": 99.99,
+      "category": "Electronics",
+      "stock": 100
+    },
+    "outOfStockProduct": {
+      "name": "Out of Stock Product",
+      "description": "This product is out of stock",
+      "price": 49.99,
+      "category": "Books",
+      "stock": 0
+    }
+  },
+  "apiEndpoints": {
+    "login": "/api/auth/login",
+    "register": "/api/auth/register",
+    "users": "/api/users",
+    "products": "/api/products",
+    "orders": "/api/orders"
+  },
+  "testData": {
+    "randomEmail": "test-{{timestamp}}@example.com",
+    "randomName": "Test User {{timestamp}}",
+    "randomProduct": "Test Product {{timestamp}}"
+  },
+  "messages": {
+    "success": {
+      "login": "Login successful",
+      "register": "Registration successful",
+      "productAdded": "Product added successfully"
+    },
+    "error": {
+      "invalidCredentials": "Invalid email or password",
+      "emailExists": "Email already exists",
+      "requiredField": "This field is required"
+    }
+  }
+}

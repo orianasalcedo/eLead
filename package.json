@@ -1,0 +1,48 @@
+{
+  "name": "cypress-testing-framework",
+  "version": "1.0.0",
+  "description": "A comprehensive Cypress testing framework with clear folder structure and base configuration",
+  "main": "index.js",
+  "scripts": {
+    "cy:open": "cypress open",
+    "cy:run": "cypress run",
+    "cy:run:headed": "cypress run --headed --browser chrome",
+    "cy:open:qa": "cypress open --env environment=qa",
+    "cy:open:stg": "cypress open --env environment=staging",
+    "cy:open:prod": "cypress open --env environment=production",
+    "cy:run:qa": "cypress run --env environment=qa",
+    "cy:run:stg": "cypress run --env environment=staging",
+    "cy:run:prod": "cypress run --env environment=production",
+    "lint": "eslint . --ext .js",
+    "format": "prettier -w \"**/*.{js,json,md}\"",
+    "report:merge": "mochawesome-merge reports/*.json > reports/report.json",
+    "report:html": "marge reports/report.json -f index -o reports",
+    "prepare": "husky"
+  },
+  "keywords": [
+    "cypress",
+    "testing",
+    "e2e",
+    "automation",
+    "javascript"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "devDependencies": {
+    "@csvtuda/cypress-xray-plugin": "^8.5.2",
+    "csv-parser": "^3.2.0",
+    "cypress": "^13.6.0",
+    "cypress-mochawesome-reporter": "^4.0.2",
+    "dotenv": "^16.6.1",
+    "eslint": "^8.55.0",
+    "eslint-config-prettier": "^9.1.2",
+    "eslint-plugin-cypress": "^2.15.1",
+    "mochawesome-merge": "^5.0.0",
+    "mochawesome-report-generator": "^6.3.0",
+    "prettier": "^3.6.2"
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
+  }
+}

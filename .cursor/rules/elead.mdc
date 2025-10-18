@@ -1,0 +1,647 @@
+---
+alwaysApply: true
+---
+# Cypress Project Rules (JavaScript) — Cursor-Friendly
+
+---
+
+## Rule 01 – Project Structure and Scaffolding
+
+Goal  
+Create and maintain a clean Cypress JS framework structure. Focused, actionable, scoped.
+
+Folder tree
+/cypress
+/e2e/smoke/
+/e2e/regression/
+/fixtures/
+/pages/
+/pages/components/
+/actions/
+/support/commands.js
+/support/e2e.js
+/utils/
+/reports
+/docs/selector-policy.md
+.env
+.eslintrc.cjs
+.prettierrc
+cypress.config.js
+cypress.env.json
+package.json
+README.md
+
+swift
+Copy code
+
+Dependencies (dev)
+- cypress
+- eslint
+- eslint-plugin-cypress
+- prettier
+- eslint-config-prettier
+- cspell
+- cypress-mochawesome-reporter
+- mochawesome-merge
+- mochawesome-report-generator
+- husky
+- lint-staged
+- (optional) cypress-axe, axe-core
+- (optional) cypress-grep
+- (optional) dotenv
+
+package.json (scripts minimal)
+```json
+{
+  "scripts": {
+    "cy:open": "cypress open",
+    "cy:run": "cypress run",
+    "cy:run:headed": "cypress run --headed --browser chrome",
+    "lint": "eslint . --ext .js",
+    "format": "prettier -w \"**/*.{js,json,md}\"",
+    "report:merge": "mochawesome-merge reports/*.json > reports/report.json",
+    "report:html": "marge reports/report.json -f index -o reports"
+  }
+}
+Rule 02 – Cypress Configuration (with Environments)
+Goal
+Set consistent defaults and select baseUrl by environment (qa, staging, production) with override via env vars.
+
+cypress.config.js
+
+js
+Copy code
+const { defineConfig } = require('cypress')
+require('dotenv').config()
+
+module.exports = defineConfig({
+  e2e: {
+    specPattern: 'cypress/e2e/**/*.{cy,spec}.js',
+    supportFile: 'cypress/support/e2e.js',
+    viewportWidth: 1440,
+    viewportHeight: 900,
+    video: true,
+    retries: { runMode: 2, openMode: 0 },
+    defaultCommandTimeout: 8000,
+    pageLoadTimeout: 60000,
+    testIsolation: true,
+    setupNodeEvents(on, config) {
+      const envName = config.env.environment
+      if (envName === 'qa') {
+        config.baseUrl = process.env.BASE_URL || 'https://tienda1.qa.eleaddev.com'
+        // eslint-disable-next-line no-console
+        console.log('Using QA Environment:', config.baseUrl)
+      } else if (envName === 'staging') {
+        config.baseUrl = process.env.BASE_URL || 'https://aya.stg.eleaddev.com'
+        // eslint-disable-next-line no-console
+        console.log('Using STG Environment:', config.baseUrl)
+      } else if (envName === 'production') {
+        config.baseUrl = process.env.PRODUCTION_URL || 'https://example.com'
+        // eslint-disable-next-line no-console
+        console.log('Using PROD Environment:', config.baseUrl)
+      } else {
+        config.baseUrl = process.env.BASE_URL || 'http://localhost:3000'
+        // eslint-disable-next-line no-console
+        console.log('Using LOCAL Environment:', config.baseUrl)
+      }
+      require('cypress-mochawesome-reporter/plugin')(on)
+      return config
+    }
+  },
+  reporter: 'cypress-mochawesome-reporter',
+  reporterOptions: {
+    reportDir: 'reports',
+    charts: true,
+    overwrite: false,
+    html: true,
+    json: true
+  }
+})
+package.json (environment helpers)
+
+json
+Copy code
+{
+  "scripts": {
+    "cy:open:qa": "cypress open --env environment=qa",
+    "cy:open:stg": "cypress open --env environment=staging",
+    "cy:open:prod": "cypress open --env environment=production",
+    "cy:run:qa": "cypress run --env environment=qa",
+    "cy:run:stg": "cypress run --env environment=staging",
+    "cy:run:prod": "cypress run --env environment=production"
+  }
+}
+cypress.env.json
+
+json
+Copy code
+{
+  "users": {
+    "admin": { "email": "admin@example.com" }
+  }
+}
+.env (example)
+
+ini
+Copy code
+BASE_URL=https://tienda1.qa.eleaddev.com
+PRODUCTION_URL=https://example.com
+ADMIN_PASSWORD=replace_in_ci
+Rule 03 – Linting and Formatting
+.eslintrc.cjs
+
+js
+Copy code
+module.exports = {
+  root: true,
+  env: { node: true, es2021: true },
+  plugins: ['cypress'],
+  extends: ['eslint:recommended', 'plugin:cypress/recommended', 'prettier'],
+  ignorePatterns: ['cypress/videos/**', 'cypress/screenshots/**', 'reports/**'],
+  rules: {
+    'cypress/no-unnecessary-waiting': 'error',
+    'no-unused-vars': ['error', { argsIgnorePattern: '^_' }]
+  },
+  overrides: [
+    {
+      files: ['cypress/e2e/**/*.js'],
+      rules: {
+        'no-restricted-imports': ['error', { patterns: ['**/cypress/pages/*'] }]
+      }
+    }
+  ]
+}
+.prettierrc
+
+json
+Copy code
+{ "semi": false, "singleQuote": true, "trailingComma": "all" }
+cspell.json
+
+json
+Copy code
+{
+  "version": "0.2",
+  "language": "en",
+  "words": ["cy","intercept","login","preprod","mochawesome","data-testid"],
+  "ignorePaths": ["cypress/videos","cypress/screenshots","reports"]
+}
+Rule 04 – Support and Custom Commands
+cypress/support/e2e.js
+
+js
+Copy code
+import 'cypress-mochawesome-reporter/register'
+import './commands'
+// Optional: cypress-grep
+// require('cypress-grep')()
+// Optional: cypress-axe
+// import 'cypress-axe'
+
+beforeEach(() => {
+  cy.clearCookies()
+  cy.clearLocalStorage()
+})
+
+// Optional: fail on console errors
+Cypress.on('window:before:load', (win) => {
+  cy.stub(win.console, 'error').as('consoleError')
+})
+afterEach(() => {
+  cy.get('@consoleError').then((stub) => {
+    if (stub && stub.callCount > 0) {
+      throw new Error(`Console errors detected: ${stub.callCount}`)
+    }
+  })
+})
+cypress/support/commands.js
+
+js
+Copy code
+Cypress.Commands.add('loginByApi', (email, password) => {
+  cy.request('POST', '/api/auth/login', { email, password }).then(({ body }) => {
+    window.localStorage.setItem('token', body.token)
+  })
+})
+Cypress.Commands.add('dataTest', (id) => cy.get(`[data-testid="${id}"]`))
+Rule 05 – Selector Policy (Front-End Contract)
+docs/selector-policy.md
+
+md
+Copy code
+Every interactive element must have data-testid (or data-cy).
+Format: kebab-case, stable, not business copy. Examples:
+- login-submit
+- order-row
+- toast-error
+Required on: inputs, buttons, links, rows, modals, toasts.
+Do not remove or rename data-testid without QA review.
+Rule 06 – Page Objects (PO)
+Principles
+
+One file per page/component under /pages.
+
+Class-based. Atomic UI actions only. No assertions.
+
+Use data-testid first, then role/aria/name/id. Avoid :nth-child.
+
+cypress/pages/LoginPage.js
+
+js
+Copy code
+class LoginPage {
+  visit() { cy.visit('/login') }
+  email() { return cy.get('[data-testid="email"]') }         // TODO if missing
+  password() { return cy.get('[data-testid="password"]') }   // TODO if missing
+  submit() { return cy.get('[data-testid="login-submit"]') } // TODO if missing
+  fillEmail(v) { this.email().clear().type(v) }
+  fillPassword(v) { this.password().clear().type(v, { log: false }) }
+  submitForm() { this.submit().click() }
+}
+module.exports = { LoginPage }
+cypress/pages/OrdersPage.js
+
+js
+Copy code
+class OrdersPage {
+  visit() { cy.visit('/orders') }
+  rows() { return cy.get('[data-testid="order-row"]') }      // TODO if missing
+  emptyState() { return cy.contains('No orders yet') }
+  errorToast() { return cy.get('[data-testid="toast-error"]') } // TODO if missing
+}
+module.exports = { OrdersPage }
+cypress/pages/components/Header.js
+
+js
+Copy code
+class Header {
+  logo() { return cy.get('[data-testid="header-logo"]') }    // TODO if missing
+  logout() { return cy.get('[data-testid="logout-btn"]') }   // TODO if missing
+}
+module.exports = { Header }
+Rule 07 – Actions (Business Flows)
+Principles
+
+One file per domain under /actions.
+
+Each function is a single business flow.
+
+Specs call Actions; Actions use Pages.
+
+Minimal assertions allowed (URL, visible state).
+
+cypress/actions/auth.actions.js
+
+js
+Copy code
+const { LoginPage } = require('../pages/LoginPage')
+const authActions = {
+  uiLogin(email, password) {
+    const login = new LoginPage()
+    login.visit()
+    login.fillEmail(email)
+    login.fillPassword(password)
+    login.submitForm()
+    cy.url().should('include', '/home')
+  },
+  apiLogin(email, password) {
+    cy.request('POST', '/api/auth/login', { email, password }).then(({ body }) => {
+      window.localStorage.setItem('token', body.token)
+    })
+  }
+}
+module.exports = { authActions }
+cypress/actions/orders.actions.js
+
+js
+Copy code
+const { OrdersPage } = require('../pages/OrdersPage')
+const { Header } = require('../pages/components/Header')
+
+const ordersActions = {
+  openAndValidateList() {
+    const header = new Header()
+    const orders = new OrdersPage()
+    orders.visit()
+    header.logo().should('be.visible')
+    orders.rows().should('have.length.at.least', 1)
+  }
+}
+module.exports = { ordersActions }
+Rule 08 – Fixtures and Mocks
+Structure
+
+pgsql
+Copy code
+/cypress/fixtures
+  users/
+    admin.json
+    customer.json
+  api/
+    orders/
+      list.json
+      empty.json
+      error.json
+Principles
+
+Small, static, environment-neutral JSON.
+
+Read-only during tests.
+
+Name by entity/purpose (users/admin.json, orders/list.json).
+
+Combine with intercepts; validate minimal shape.
+
+Examples
+
+js
+Copy code
+cy.fixture('users/admin').as('admin')
+cy.get('@admin').then(({ email, password }) => {
+  cy.loginByApi(email, password)
+})
+
+cy.intercept('GET', '/api/orders*', { fixture: 'api/orders/list.json' }).as('getOrders')
+cy.wait('@getOrders').its('response.statusCode').should('eq', 200)
+
+cy.fixture('api/orders/list.json').then((body) => {
+  expect(body).to.be.an('array')
+  if (body.length) expect(body[0]).to.have.keys(['id','total','status'])
+})
+Rule 09 – Data Utilities (Dynamic Data)
+cypress/utils/data.js
+
+js
+Copy code
+function randomEmail(prefix = 'user') {
+  const n = Math.floor(Math.random() * 1e6)
+  return `${prefix}${n}@example.com`
+}
+module.exports = { randomEmail }
+Pattern: merge fixture + dynamic
+
+js
+Copy code
+cy.fixture('api/orders/new-order').then((base) => {
+  const order = { ...base, id: Date.now(), total: 99.9 }
+  cy.request('POST', '/api/orders', order)
+})
+Rule 10 – Network Control and Synchronization
+Principles
+
+No cy.wait(<number>).
+
+Use cy.intercept + alias + wait + assert status and UI.
+
+Post-wait UI assertions: visible state, URL includes, element counts.
+
+Examples
+
+js
+Copy code
+cy.intercept('GET', '/api/orders*').as('getOrders')
+cy.visit('/orders')
+cy.wait('@getOrders').its('response.statusCode').should('eq', 200)
+cy.dataTest('order-row').should('have.length.at.least', 1)
+
+cy.intercept('GET', '/api/orders*', { statusCode: 200, body: [] }).as('empty')
+cy.visit('/orders')
+cy.wait('@empty')
+cy.contains('No orders yet').should('be.visible')
+
+cy.intercept('GET', '/api/orders*', { statusCode: 500, body: { message: 'Internal error' } }).as('fail')
+cy.visit('/orders')
+cy.wait('@fail')
+cy.dataTest('toast-error').should('be.visible').and('contain', 'Something went wrong')
+Rule 11 – Smoke Tests Templates
+cypress/e2e/smoke/login.cy.js
+
+js
+Copy code
+describe('Login', () => {
+  it('should login via API and reach Home', () => {
+    cy.fixture('users/admin').then(({ email, password }) => {
+      cy.session([email], () => { cy.loginByApi(email, password) })
+      cy.visit('/home')
+      cy.contains('Welcome').should('be.visible')
+    })
+  })
+})
+cypress/e2e/smoke/orders.cy.js
+
+js
+Copy code
+describe('Orders', () => {
+  it('renders orders from API', () => {
+    cy.intercept('GET', '/api/orders*').as('getOrders')
+    cy.visit('/orders')
+    cy.wait('@getOrders').its('response.statusCode').should('eq', 200)
+    cy.dataTest('order-row').should('have.length.at.least', 1)
+  })
+
+  it('shows empty state', () => {
+    cy.intercept('GET', '/api/orders*', { statusCode: 200, body: [] }).as('empty')
+    cy.visit('/orders')
+    cy.wait('@empty')
+    cy.contains('No orders yet').should('be.visible')
+  })
+
+  it('shows friendly error on 500', () => {
+    cy.intercept('GET', '/api/orders*', { statusCode: 500, body: { message: 'Internal error' } }).as('fail')
+    cy.visit('/orders')
+    cy.wait('@fail')
+    cy.dataTest('toast-error').should('be.visible').and('contain', 'Something went wrong')
+  })
+})
+Rule 12 – Naming and Tagging
+Conventions
+
+Test names: “should <do something> when <condition>”.
+
+File naming: *.smoke.cy.js, *.regression.cy.js or use subfolders.
+
+Optional tags with cypress-grep.
+
+Example
+
+js
+Copy code
+it('should place an order @smoke @orders', { tags: ['smoke','orders'] }, () => { /* ... */ })
+Run tagged
+
+bash
+Copy code
+npx cypress run --env grep=smoke
+Rule 13 – Error Logging and Artifacts
+Principles
+
+Keep video true and screenshots on fail (Cypress defaults).
+
+Fail test if console errors were emitted (snippet in support/e2e.js).
+
+Artifacts: upload videos, screenshots, and mochawesome HTML in CI.
+
+Rule 14 – Pre-Commit Quality Gates
+Dev dependencies
+
+husky, lint-staged, cspell
+
+package.json
+
+json
+Copy code
+{
+  "lint-staged": {
+    "*.{js,json,md}": ["prettier -w", "eslint --fix"],
+    "*.md": ["cspell --no-progress --no-must-find-files"]
+  },
+  "scripts": { "prepare": "husky" }
+}
+.husky/pre-commit
+
+bash
+Copy code
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+npx lint-staged
+Rule 15 – Continuous Integration (GitHub Actions)
+.github/workflows/cypress.yml
+
+yml
+Copy code
+name: e2e
+on: [push, pull_request]
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        envName: [qa, staging]
+        browser: [chrome, firefox]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '20', cache: 'npm' }
+      - run: npm ci
+      - run: npx cypress verify
+      - name: Run Cypress
+        env:
+          BASE_URL: ${{ matrix.envName == 'qa' && 'https://tienda1.qa.eleaddev.com' || 'https://aya.stg.eleaddev.com' }}
+          ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
+        run: npx cypress run --env environment=${{ matrix.envName }} --browser ${{ matrix.browser }}
+      - run: npm run report:merge && npm run report:html
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cypress-artifacts-${{ matrix.envName }}-${{ matrix.browser }}
+          path: |
+            cypress/videos
+            cypress/screenshots
+            reports
+Rule 16 – Accessibility Testing (Optional)
+Dev dependencies
+
+cypress-axe, axe-core
+
+Usage
+
+js
+Copy code
+// in support/e2e.js
+import 'cypress-axe'
+
+// in a spec
+cy.injectAxe()
+cy.checkA11y(null, { includedImpacts: ['critical','serious'] })
+Rule 17 – Fixtures, Pages, and Data Optimization
+Goals
+
+Efficient fixtures usage, strict Page/Action boundaries, dynamic data utilities.
+
+Fixtures rules
+
+Small, static, environment-neutral JSON.
+
+Do not mutate during tests.
+
+Use aliases and intercepts together.
+
+Pages rules
+
+Class-based, atomic actions only, no assertions, stable selectors.
+
+Actions rules
+
+One flow per function, Specs → Actions → Pages chain.
+
+Examples
+
+js
+Copy code
+// Fixture alias + API login
+cy.fixture('users/admin').as('admin')
+cy.get('@admin').then(({ email, password }) => {
+  cy.loginByApi(email, password)
+})
+
+// Page reuse in actions
+const { OrdersPage } = require('../pages/OrdersPage')
+const { Header } = require('../pages/components/Header')
+const ordersActions = {
+  validateOrdersLoaded() {
+    const header = new Header()
+    const orders = new OrdersPage()
+    orders.visit()
+    header.logo().should('be.visible')
+    orders.rows().should('have.length.at.least', 1)
+  }
+}
+Dynamic data
+
+js
+Copy code
+// cypress/utils/data.js
+function randomEmail(prefix = 'user') {
+  const n = Math.floor(Math.random() * 1e6)
+  return `${prefix}${n}@example.com`
+}
+module.exports = { randomEmail }
+Validation checklist
+
+All Page selectors use data-testid (or stable attribute).
+
+Specs import only Actions (ESLint guard prevents direct Page imports).
+
+Fixtures are read-only and versioned.
+
+No hardcoded test data in specs.
+
+Dynamic data comes from /utils.
+
+No cy.wait(number).
+
+Rule 18 – README Quickstart
+README.md
+
+md
+Copy code
+# Cypress Automation Framework (JS)
+
+## Quickstart
+1) npm ci
+2) BASE_URL=http://localhost:3000 npm run cy:open
+3) Secrets in CI: ADMIN_PASSWORD, BASE_URL or PRODUCTION_URL
+
+## Environments
+- --env environment=qa → https://tienda1.qa.eleaddev.com (or BASE_URL)
+- --env environment=staging → https://aya.stg.eleaddev.com (or BASE_URL)
+- --env environment=production → https://example.com (or PRODUCTION_URL)
+
+## Conventions
+- JavaScript only (no TypeScript)
+- Page Object + Actions pattern
+- Use data-testid selectors
+- No cy.wait(n); use intercept+alias+assertions
+
+## Run examples
+- Smoke: npx cypress run --env grep=smoke
+- Cross-browser: npx cypress run --browser chrome

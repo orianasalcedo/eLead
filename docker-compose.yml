@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  cypress:
+    build: .
+    volumes:
+      - ./cypress/screenshots:/app/cypress/screenshots
+      - ./cypress/videos:/app/cypress/videos
+      - ./cypress/results:/app/cypress/results
+    environment:
+      - CYPRESS_baseUrl=http://host.docker.internal:3000
+    command: npm run cypress:run
+
+  # Example: Add your application service for testing
+  app:
+    image: nginx:alpine
+    ports:
+      - "3000:80"
+    volumes:
+      - ./public:/usr/share/nginx/html
+    profiles:
+      - app

@@ -1,0 +1,11 @@
+{
+  "shipping_address": {
+    "address_line": "123 Main Street",
+    "address_line_two": "Apt 4B",
+    "city": "Springfield",
+    "zip_code": "12345",
+    "phone_number": "5551234567",
+    "country_id": null,
+    "state_id": null
+  }
+}

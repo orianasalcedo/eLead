@@ -1,0 +1,30 @@
+{
+  "timestamp": "2025-10-17T21:37:32.706Z",
+  "repository": {
+    "name": "e-lead-promo-admin",
+    "path": "./repos/e-lead-promo-admin",
+    "packageJson": null,
+    "structure": {},
+    "components": [],
+    "pages": [],
+    "apiEndpoints": [],
+    "selectors": [],
+    "testFiles": [],
+    "adminFeatures": []
+  },
+  "summary": {
+    "totalComponents": 0,
+    "totalPages": 0,
+    "totalApiEndpoints": 0,
+    "totalSelectors": 0,
+    "totalTestFiles": 0,
+    "totalAdminFeatures": 0
+  },
+  "recommendations": [
+    {
+      "type": "testing",
+      "priority": "high",
+      "message": "No se encontraron archivos de test existentes. Considera implementar tests unitarios junto con tests de Cypress."
+    }
+  ]
+}
