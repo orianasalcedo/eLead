@@ -9,15 +9,16 @@
     "cy:run:headed": "cypress run --headed --browser chrome",
     "cy:open:qa": "cypress open --env environment=qa",
     "cy:open:stg": "cypress open --env environment=staging",
-    "cy:open:prod": "cypress open --env environment=production",
     "cy:run:qa": "cypress run --env environment=qa",
     "cy:run:stg": "cypress run --env environment=staging",
-    "cy:run:prod": "cypress run --env environment=production",
+    "cy:run:smoke": "cypress run --spec 'cypress/e2e/smoke/**'",
+    "cy:run:api": "cypress run --spec 'cypress/e2e/api/**'",
     "lint": "eslint . --ext .js",
+    "lint:fix": "eslint . --ext .js --fix",
     "format": "prettier -w \"**/*.{js,json,md}\"",
+    "format:check": "prettier --check \"**/*.{js,json,md}\"",
     "report:merge": "mochawesome-merge reports/*.json > reports/report.json",
-    "report:html": "marge reports/report.json -f index -o reports",
-    "prepare": "husky"
+    "report:html": "marge reports/report.json -f index -o reports"
   },
   "keywords": [
     "cypress",

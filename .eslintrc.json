@@ -3,7 +3,11 @@
   "env": { "node": true, "es2021": true },
   "plugins": ["cypress"],
   "extends": ["eslint:recommended", "plugin:cypress/recommended", "prettier"],
-  "ignorePatterns": ["cypress/videos/**", "cypress/screenshots/**", "reports/**"],
+  "ignorePatterns": [
+    "cypress/videos/**",
+    "cypress/screenshots/**",
+    "reports/**"
+  ],
   "rules": {
     "cypress/no-unnecessary-waiting": "error",
     "no-unused-vars": ["error", { "argsIgnorePattern": "^_" }]
@@ -12,7 +16,10 @@
     {
       "files": ["cypress/e2e/**/*.js"],
       "rules": {
-        "no-restricted-imports": ["error", { "patterns": ["**/cypress/pages/*"] }]
+        "no-restricted-imports": [
+          "error",
+          { "patterns": ["**/cypress/pages/*"] }
+        ]
       }
     }
   ]

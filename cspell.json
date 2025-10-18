@@ -1,6 +1,13 @@
 {
   "version": "0.2",
   "language": "en",
-  "words": ["cy","intercept","login","preprod","mochawesome","data-testid"],
-  "ignorePaths": ["cypress/videos","cypress/screenshots","reports"]
+  "words": [
+    "cy",
+    "intercept",
+    "login",
+    "preprod",
+    "mochawesome",
+    "data-testid"
+  ],
+  "ignorePaths": ["cypress/videos", "cypress/screenshots", "reports"]
 }

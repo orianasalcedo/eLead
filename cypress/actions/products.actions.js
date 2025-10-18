@@ -59,4 +59,3 @@ const productsActions = {
 }
 
 module.exports = { productsActions }
-

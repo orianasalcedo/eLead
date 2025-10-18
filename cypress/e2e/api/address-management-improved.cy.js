@@ -1,14 +1,17 @@
 /**
  * Address Management Tests - Best Practices
  * Following Cypress Rules 08, 09, 17
- * 
+ *
  * ✅ Uses fixtures for base data
  * ✅ Uses utils for dynamic data
  * ✅ Fetches real country/state IDs from API
  * ✅ No hardcoded dummy data
  */
 
-const { createShippingAddress, createBillingAddress } = require('../../utils/address-generator')
+const {
+  createShippingAddress,
+  createBillingAddress,
+} = require('../../utils/address-generator')
 
 describe('eLead Promo API - Address Management (Improved)', () => {
   let authHeaders
@@ -17,7 +20,9 @@ describe('eLead Promo API - Address Management (Improved)', () => {
 
   before(() => {
     const environment = Cypress.env('environment')
-    cy.log(`🧪 Running Address Management tests in ${environment.toUpperCase()} environment`)
+    cy.log(
+      `🧪 Running Address Management tests in ${environment.toUpperCase()} environment`,
+    )
   })
 
   beforeEach(() => {
@@ -26,40 +31,49 @@ describe('eLead Promo API - Address Management (Improved)', () => {
     cy.eleadpromoLogin(email, password).then((response) => {
       authHeaders = {
         'access-token': response.headers['access-token'],
-        'client': response.headers['client'],
-        'uid': response.headers['uid'],
+        client: response.headers['client'],
+        uid: response.headers['uid'],
       }
     })
 
     // Get REAL country and state IDs from API (not dummy data!)
-    cy.apiRequest('GET', '/api/v1/countries', null, { headers: authHeaders }).then(
-      (response) => {
-        if (response.status === 200 && response.body.data && response.body.data.length > 0) {
-          // Use first available country
-          realCountryId = response.body.data[0].id
-          cy.log(`✅ Using real country ID: ${realCountryId}`)
+    cy.apiRequest('GET', '/api/v1/countries', null, {
+      headers: authHeaders,
+    }).then((response) => {
+      if (
+        response.status === 200 &&
+        response.body.data &&
+        response.body.data.length > 0
+      ) {
+        // Use first available country
+        realCountryId = response.body.data[0].id
+        cy.log(`✅ Using real country ID: ${realCountryId}`)
 
-          // Get states for this country
-          cy.apiRequest('GET', `/api/v1/countries/${realCountryId}/states`, null, {
+        // Get states for this country
+        cy.apiRequest(
+          'GET',
+          `/api/v1/countries/${realCountryId}/states`,
+          null,
+          {
             headers: authHeaders,
-          }).then((statesResponse) => {
-            if (
-              statesResponse.status === 200 &&
-              statesResponse.body.data &&
-              statesResponse.body.data.length > 0
-            ) {
-              // Use first available state
-              realStateId = statesResponse.body.data[0].id
-              cy.log(`✅ Using real state ID: ${realStateId}`)
-            } else {
-              cy.log('⚠️  No states available, tests may fail')
-            }
-          })
-        } else {
-          cy.log('⚠️  No countries available, tests may fail')
-        }
+          },
+        ).then((statesResponse) => {
+          if (
+            statesResponse.status === 200 &&
+            statesResponse.body.data &&
+            statesResponse.body.data.length > 0
+          ) {
+            // Use first available state
+            realStateId = statesResponse.body.data[0].id
+            cy.log(`✅ Using real state ID: ${realStateId}`)
+          } else {
+            cy.log('⚠️  No states available, tests may fail')
+          }
+        })
+      } else {
+        cy.log('⚠️  No countries available, tests may fail')
       }
-    )
+    })
   })
 
   describe('Shipping Address - With Real Data', () => {
@@ -67,7 +81,9 @@ describe('eLead Promo API - Address Management (Improved)', () => {
       // Generate address with REAL country/state IDs
       const addressData = createShippingAddress(realCountryId, realStateId)
 
-      cy.log(`📦 Creating shipping address for country ${realCountryId}, state ${realStateId}`)
+      cy.log(
+        `📦 Creating shipping address for country ${realCountryId}, state ${realStateId}`,
+      )
 
       cy.apiRequest('POST', '/api/v1/shipping_addresses', addressData, {
         headers: authHeaders,
@@ -114,7 +130,9 @@ describe('eLead Promo API - Address Management (Improved)', () => {
     it('should create billing address with dynamically generated data', () => {
       const addressData = createBillingAddress(realCountryId, realStateId)
 
-      cy.log(`💳 Creating billing address for country ${realCountryId}, state ${realStateId}`)
+      cy.log(
+        `💳 Creating billing address for country ${realCountryId}, state ${realStateId}`,
+      )
 
       cy.apiRequest('POST', '/api/v1/billing_addresses', addressData, {
         headers: authHeaders,
@@ -164,4 +182,3 @@ describe('eLead Promo API - Address Management (Improved)', () => {
     })
   })
 })
-

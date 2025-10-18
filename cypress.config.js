@@ -15,7 +15,8 @@ module.exports = defineConfig({
     setupNodeEvents(on, config) {
       const envName = config.env.environment
       if (envName === 'qa') {
-        config.baseUrl = process.env.BASE_URL || 'https://tienda1.qa.eleaddev.com'
+        config.baseUrl =
+          process.env.BASE_URL || 'https://tienda1.qa.eleaddev.com'
         // eslint-disable-next-line no-console
         console.log('Using QA Environment:', config.baseUrl)
       } else if (envName === 'staging') {
@@ -33,7 +34,7 @@ module.exports = defineConfig({
       }
       require('cypress-mochawesome-reporter/plugin')(on)
       return config
-    }
+    },
   },
   reporter: 'cypress-mochawesome-reporter',
   reporterOptions: {
@@ -41,6 +42,6 @@ module.exports = defineConfig({
     charts: true,
     overwrite: false,
     html: true,
-    json: true
-  }
+    json: true,
+  },
 })

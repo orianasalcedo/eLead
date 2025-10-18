@@ -27,9 +27,11 @@ const authActions = {
    * @param {string} password - User password
    */
   apiLogin(email, password) {
-    cy.request('POST', '/api/auth/login', { email, password }).then(({ body }) => {
-      window.localStorage.setItem('token', body.token)
-    })
+    cy.request('POST', '/api/auth/login', { email, password }).then(
+      ({ body }) => {
+        window.localStorage.setItem('token', body.token)
+      },
+    )
   },
 
   /**
@@ -59,4 +61,3 @@ const authActions = {
 }
 
 module.exports = { authActions }
-
