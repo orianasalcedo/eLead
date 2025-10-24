@@ -1,0 +1,18 @@
+{
+  "testUser": {
+    "email": "oriana.salcedo@rootstrap.com",
+    "password": "Testing2!",
+    "name": "Oriana Salcedo"
+  },
+  "invalidUser": {
+    "email": "invalid@example.com",
+    "password": "wrongpassword"
+  },
+  "homepageContent": {
+    "expectedH2Texts": [
+      "new favorites",
+      "looking for more options"
+    ],
+    "navigationSelector": "body > div > div.flex.min-h-screen.flex-col.items-center.justify-between > div > header > div > nav > div:nth-child(1) > ul"
+  }
+}

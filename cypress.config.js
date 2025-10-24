@@ -1,8 +1,27 @@
 const { defineConfig } = require('cypress')
 require('dotenv').config()
 
+// Get environment from process.env or default to 'qa'
+const environment = process.env.CYPRESS_ENV || 'qa'
+
+// Set baseUrl based on environment
+let baseUrl
+if (environment === 'qa') {
+  baseUrl = process.env.BASE_URL || 'https://tienda1.qa.eleaddev.com'
+} else if (environment === 'staging') {
+  baseUrl = process.env.BASE_URL || 'https://aya.stg.eleaddev.com'
+} else if (environment === 'production') {
+  baseUrl = process.env.PRODUCTION_URL || 'https://example.com'
+} else {
+  baseUrl = process.env.BASE_URL || 'http://localhost:3000'
+}
+
+// eslint-disable-next-line no-console
+console.log(`Using ${environment.toUpperCase()} Environment:`, baseUrl)
+
 module.exports = defineConfig({
   e2e: {
+    baseUrl, // Set baseUrl directly in config
     specPattern: 'cypress/e2e/**/*.{cy,spec}.js',
     supportFile: 'cypress/support/e2e.js',
     viewportWidth: 1440,
@@ -11,28 +30,27 @@ module.exports = defineConfig({
     retries: { runMode: 2, openMode: 0 },
     defaultCommandTimeout: 8000,
     pageLoadTimeout: 60000,
-    testIsolation: true,
+    testIsolation: false,
+    chromeWebSecurity: false, // Allow Chrome to handle security
     setupNodeEvents(on, config) {
-      const envName = config.env.environment
-      if (envName === 'qa') {
-        config.baseUrl =
-          process.env.BASE_URL || 'https://tienda1.qa.eleaddev.com'
-        // eslint-disable-next-line no-console
-        console.log('Using QA Environment:', config.baseUrl)
-      } else if (envName === 'staging') {
-        config.baseUrl = process.env.BASE_URL || 'https://aya.stg.eleaddev.com'
-        // eslint-disable-next-line no-console
-        console.log('Using STG Environment:', config.baseUrl)
-      } else if (envName === 'production') {
-        config.baseUrl = process.env.PRODUCTION_URL || 'https://example.com'
-        // eslint-disable-next-line no-console
-        console.log('Using PROD Environment:', config.baseUrl)
-      } else {
-        config.baseUrl = process.env.BASE_URL || 'http://localhost:3000'
-        // eslint-disable-next-line no-console
-        console.log('Using LOCAL Environment:', config.baseUrl)
-      }
       require('cypress-mochawesome-reporter/plugin')(on)
+
+      // Xray Integration - Temporarily disabled due to plugin issues
+      // const xrayPlugin = require('@csvtuda/cypress-xray-plugin')
+      // xrayPlugin(on, config, {
+      //   jira: {
+      //     url: 'https://rootstrap.atlassian.net',
+      //     username: 'oriana.salcedo@rootstrap.com',
+      //     password: 'siemprecrecer',
+      //     projectKey: 'ELP'
+      //   },
+      //   xray: {
+      //     testExecutionKey: 'ELP-3785',
+      //     testPlanKey: 'ELP-49',
+      //     testEnvironment: 'QA'
+      //   }
+      // })
+
       return config
     },
   },

@@ -1,0 +1,2889 @@
+{
+  "testPlan": null,
+  "testExecutions": [],
+  "csvTestExecutions": [
+    {
+      "key": "ELP-3785",
+      "summary": "[Regression] Store Navigation (Catalog and Checkout)",
+      "description": {
+        "type": "doc",
+        "version": 1,
+        "content": [
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "text",
+                "text": "View all Products "
+              },
+              {
+                "type": "text",
+                "text": "https://rootstrap.atlassian.net/browse/ELP-50",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://rootstrap.atlassian.net/browse/ELP-50"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "Single vs Bulk filters "
+              },
+              {
+                "type": "text",
+                "text": "https://rootstrap.atlassian.net/browse/ELP-1105",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://rootstrap.atlassian.net/browse/ELP-1105"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "Search box "
+              },
+              {
+                "type": "text",
+                "text": "https://rootstrap.atlassian.net/browse/ELP-66",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://rootstrap.atlassian.net/browse/ELP-66"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "View My Cart "
+              },
+              {
+                "type": "text",
+                "text": "https://rootstrap.atlassian.net/browse/ELP-55",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://rootstrap.atlassian.net/browse/ELP-55"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "View Product Details "
+              },
+              {
+                "type": "text",
+                "text": "https://rootstrap.atlassian.net/browse/ELP-52",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://rootstrap.atlassian.net/browse/ELP-52"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "Select variants product variants in Cart "
+              },
+              {
+                "type": "text",
+                "text": "https://rootstrap.atlassian.net/browse/ELP-53",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://rootstrap.atlassian.net/browse/ELP-53"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "Remove items from Cart "
+              },
+              {
+                "type": "text",
+                "text": "https://rootstrap.atlassian.net/browse/ELP-56",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://rootstrap.atlassian.net/browse/ELP-56"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "Ship To "
+              },
+              {
+                "type": "text",
+                "text": "https://rootstrap.atlassian.net/browse/ELP-60",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://rootstrap.atlassian.net/browse/ELP-60"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "Shipping Method "
+              },
+              {
+                "type": "text",
+                "text": "https://rootstrap.atlassian.net/browse/ELP-58",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://rootstrap.atlassian.net/browse/ELP-58"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "Billing "
+              },
+              {
+                "type": "text",
+                "text": "https://rootstrap.atlassian.net/browse/ELP-61",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://rootstrap.atlassian.net/browse/ELP-61"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "Review "
+              },
+              {
+                "type": "text",
+                "text": "https://rootstrap.atlassian.net/browse/ELP-62",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://rootstrap.atlassian.net/browse/ELP-62"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "Finish "
+              },
+              {
+                "type": "text",
+                "text": "https://rootstrap.atlassian.net/browse/ELP-1431",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://rootstrap.atlassian.net/browse/ELP-1431"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "status": "Done",
+      "testCases": [],
+      "xrayDetails": {}
+    },
+    {
+      "key": "ELP-3786",
+      "summary": "[Regression] Store Navigation (Customer Profile)",
+      "description": {
+        "type": "doc",
+        "version": 1,
+        "content": [
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "text",
+                "text": "Account Info "
+              },
+              {
+                "type": "text",
+                "text": "https://rootstrap.atlassian.net/browse/ELP-660",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://rootstrap.atlassian.net/browse/ELP-660"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "Order history Index "
+              },
+              {
+                "type": "text",
+                "text": "https://rootstrap.atlassian.net/browse/ELP-688",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://rootstrap.atlassian.net/browse/ELP-688"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "Order detail "
+              },
+              {
+                "type": "text",
+                "text": "https://rootstrap.atlassian.net/browse/ELP-689",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://rootstrap.atlassian.net/browse/ELP-689"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "Address Book "
+              },
+              {
+                "type": "text",
+                "text": "https://rootstrap.atlassian.net/browse/ELP-661",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://rootstrap.atlassian.net/browse/ELP-661"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "Store Credits "
+              },
+              {
+                "type": "text",
+                "text": "https://rootstrap.atlassian.net/browse/ELP-3390",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://rootstrap.atlassian.net/browse/ELP-3390"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "status": "Done",
+      "testCases": [],
+      "xrayDetails": {}
+    },
+    {
+      "key": "ELP-3772",
+      "summary": "[Regression] Payment Methods",
+      "description": {
+        "type": "doc",
+        "version": 1,
+        "content": [
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "text",
+                "text": "Index "
+              },
+              {
+                "type": "text",
+                "text": "https://rootstrap.atlassian.net/browse/ELP-149",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://rootstrap.atlassian.net/browse/ELP-149"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "Activate Payment methods and see them at the store "
+              },
+              {
+                "type": "text",
+                "text": "https://rootstrap.atlassian.net/browse/ELP-2594",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://rootstrap.atlassian.net/browse/ELP-2594"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "Edit payment methods "
+              },
+              {
+                "type": "text",
+                "text": "https://rootstrap.atlassian.net/browse/ELP-151",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://rootstrap.atlassian.net/browse/ELP-151"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "Bill Me Later Restrictions:"
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "inlineCard",
+                "attrs": {
+                  "url": "https://rootstrap.atlassian.net/browse/ELP-107"
+                }
+              },
+              {
+                "type": "text",
+                "text": " "
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "inlineCard",
+                "attrs": {
+                  "url": "https://rootstrap.atlassian.net/browse/ELP-108"
+                }
+              },
+              {
+                "type": "text",
+                "text": " "
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "inlineCard",
+                "attrs": {
+                  "url": "https://rootstrap.atlassian.net/browse/ELP-3206"
+                }
+              },
+              {
+                "type": "text",
+                "text": " "
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "inlineCard",
+                "attrs": {
+                  "url": "https://rootstrap.atlassian.net/browse/ELP-3207"
+                }
+              },
+              {
+                "type": "text",
+                "text": " "
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "inlineCard",
+                "attrs": {
+                  "url": "https://rootstrap.atlassian.net/browse/ELP-3384"
+                }
+              },
+              {
+                "type": "text",
+                "text": " "
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "text",
+                "text": "Ghost Cards: "
+              },
+              {
+                "type": "inlineCard",
+                "attrs": {
+                  "url": "https://rootstrap.atlassian.net/browse/ELP-3749"
+                }
+              },
+              {
+                "type": "text",
+                "text": " "
+              }
+            ]
+          }
+        ]
+      },
+      "status": "Done",
+      "testCases": [],
+      "xrayDetails": {}
+    },
+    {
+      "key": "ELP-3783",
+      "summary": "[Regression] Pricing",
+      "description": {
+        "type": "doc",
+        "version": 1,
+        "content": [
+          {
+            "type": "paragraph"
+          },
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "text",
+                "text": "Product Price (precio base + decoración + regla de pricing): "
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "https://rootstrap.atlassian.net/browse/ELP-2397",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://rootstrap.atlassian.net/browse/ELP-2397"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "text",
+                "text": " and "
+              },
+              {
+                "type": "text",
+                "text": "https://rootstrap.atlassian.net/browse/ELP-2648",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://rootstrap.atlassian.net/browse/ELP-2648"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "text",
+                "text": " and "
+              },
+              {
+                "type": "text",
+                "text": "https://rootstrap.atlassian.net/browse/ELP-2738",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://rootstrap.atlassian.net/browse/ELP-2738"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "text",
+                "text": "Pricing rules: "
+              },
+              {
+                "type": "text",
+                "text": "https://rootstrap.atlassian.net/browse/ELP-2396",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://rootstrap.atlassian.net/browse/ELP-2396"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "text",
+                "text": " and "
+              },
+              {
+                "type": "text",
+                "text": "https://rootstrap.atlassian.net/browse/ELP-141",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://rootstrap.atlassian.net/browse/ELP-141"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "text",
+                "text": "Shipping and Handling Fee: "
+              },
+              {
+                "type": "inlineCard",
+                "attrs": {
+                  "url": "https://rootstrap.atlassian.net/browse/ELP-2683"
+                }
+              },
+              {
+                "type": "text",
+                "text": " and "
+              },
+              {
+                "type": "inlineCard",
+                "attrs": {
+                  "url": "https://rootstrap.atlassian.net/browse/ELP-2395"
+                }
+              },
+              {
+                "type": "text",
+                "text": " "
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "text",
+                "text": "Taxes: "
+              },
+              {
+                "type": "inlineCard",
+                "attrs": {
+                  "url": "https://rootstrap.atlassian.net/browse/ELP-3388"
+                }
+              },
+              {
+                "type": "text",
+                "text": "  and "
+              },
+              {
+                "type": "inlineCard",
+                "attrs": {
+                  "url": "https://rootstrap.atlassian.net/browse/ELP-3403"
+                }
+              },
+              {
+                "type": "text",
+                "text": " and "
+              },
+              {
+                "type": "inlineCard",
+                "attrs": {
+                  "url": "https://rootstrap.atlassian.net/browse/ELP-2099"
+                }
+              },
+              {
+                "type": "text",
+                "text": " and "
+              },
+              {
+                "type": "inlineCard",
+                "attrs": {
+                  "url": "https://rootstrap.atlassian.net/browse/ELP-1613"
+                }
+              },
+              {
+                "type": "text",
+                "text": " "
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "text",
+                "text": "Stripe: "
+              },
+              {
+                "type": "text",
+                "text": "https://rootstrap.atlassian.net/browse/ELP-3312",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://rootstrap.atlassian.net/browse/ELP-3312"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "status": "Done",
+      "testCases": [],
+      "xrayDetails": {}
+    },
+    {
+      "key": "ELP-3781",
+      "summary": "[Regression] Incentives",
+      "description": {
+        "type": "doc",
+        "version": 1,
+        "content": [
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "text",
+                "text": "View List Gift and User Codes "
+              },
+              {
+                "type": "text",
+                "text": "https://rootstrap.atlassian.net/browse/ELP-179",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://rootstrap.atlassian.net/browse/ELP-179"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "View List Promo Codes "
+              },
+              {
+                "type": "text",
+                "text": "https://rootstrap.atlassian.net/browse/ELP-178",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://rootstrap.atlassian.net/browse/ELP-178"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "Add Gift Code "
+              },
+              {
+                "type": "text",
+                "text": "https://rootstrap.atlassian.net/browse/ELP-1848",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://rootstrap.atlassian.net/browse/ELP-1848"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "Import Gift Codes "
+              },
+              {
+                "type": "text",
+                "text": "https://rootstrap.atlassian.net/browse/ELP-1956",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://rootstrap.atlassian.net/browse/ELP-1956"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "Add User Codes "
+              },
+              {
+                "type": "text",
+                "text": "https://rootstrap.atlassian.net/browse/ELP-1955",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://rootstrap.atlassian.net/browse/ELP-1955"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "Add Customer when Generating User Codes "
+              },
+              {
+                "type": "text",
+                "text": "https://rootstrap.atlassian.net/browse/ELP-3402",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://rootstrap.atlassian.net/browse/ELP-3402"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "Add Promo Codes "
+              },
+              {
+                "type": "text",
+                "text": "https://rootstrap.atlassian.net/browse/ELP-1794",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://rootstrap.atlassian.net/browse/ELP-1794"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "text",
+                "text": "Apply Codes to Checkout:"
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": " "
+              },
+              {
+                "type": "inlineCard",
+                "attrs": {
+                  "url": "https://rootstrap.atlassian.net/browse/ELP-2176"
+                }
+              },
+              {
+                "type": "text",
+                "text": " "
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "inlineCard",
+                "attrs": {
+                  "url": "https://rootstrap.atlassian.net/browse/ELP-59"
+                }
+              },
+              {
+                "type": "text",
+                "text": " "
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "inlineCard",
+                "attrs": {
+                  "url": "https://rootstrap.atlassian.net/browse/ELP-2177"
+                }
+              },
+              {
+                "type": "text",
+                "text": " "
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "text",
+                "text": "Note: this option is no longer visible and available "
+              },
+              {
+                "type": "text",
+                "text": "https://rootstrap.atlassian.net/browse/ELP-3385",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://rootstrap.atlassian.net/browse/ELP-3385"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "status": "To Do",
+      "testCases": [],
+      "xrayDetails": {}
+    },
+    {
+      "key": "ELP-3782",
+      "summary": "[Regression] Orders",
+      "description": {
+        "type": "doc",
+        "version": 1,
+        "content": [
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "text",
+                "text": "Orders Main View: "
+              },
+              {
+                "type": "text",
+                "text": "https://rootstrap.atlassian.net/browse/ELP-1918",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://rootstrap.atlassian.net/browse/ELP-1918"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "Orders details:"
+              }
+            ]
+          },
+          {
+            "type": "bulletList",
+            "content": [
+              {
+                "type": "listItem",
+                "content": [
+                  {
+                    "type": "paragraph",
+                    "content": [
+                      {
+                        "type": "text",
+                        "text": "Order Details and shipping and billing "
+                      },
+                      {
+                        "type": "text",
+                        "text": "https://rootstrap.atlassian.net/browse/ELP-228",
+                        "marks": [
+                          {
+                            "type": "link",
+                            "attrs": {
+                              "href": "https://rootstrap.atlassian.net/browse/ELP-228"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "listItem",
+                "content": [
+                  {
+                    "type": "paragraph",
+                    "content": [
+                      {
+                        "type": "text",
+                        "text": "Products ordered section "
+                      },
+                      {
+                        "type": "text",
+                        "text": "https://rootstrap.atlassian.net/browse/ELP-2185",
+                        "marks": [
+                          {
+                            "type": "link",
+                            "attrs": {
+                              "href": "https://rootstrap.atlassian.net/browse/ELP-2185"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "listItem",
+                "content": [
+                  {
+                    "type": "paragraph",
+                    "content": [
+                      {
+                        "type": "text",
+                        "text": "Notes "
+                      },
+                      {
+                        "type": "text",
+                        "text": "https://rootstrap.atlassian.net/browse/ELP-2184",
+                        "marks": [
+                          {
+                            "type": "link",
+                            "attrs": {
+                              "href": "https://rootstrap.atlassian.net/browse/ELP-2184"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "listItem",
+                "content": [
+                  {
+                    "type": "paragraph",
+                    "content": [
+                      {
+                        "type": "text",
+                        "text": "Payment, shipping and billing information "
+                      },
+                      {
+                        "type": "text",
+                        "text": "https://rootstrap.atlassian.net/browse/ELP-2187",
+                        "marks": [
+                          {
+                            "type": "link",
+                            "attrs": {
+                              "href": "https://rootstrap.atlassian.net/browse/ELP-2187"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "listItem",
+                "content": [
+                  {
+                    "type": "paragraph",
+                    "content": [
+                      {
+                        "type": "text",
+                        "text": "Orders status machine: "
+                      },
+                      {
+                        "type": "text",
+                        "text": "https://rootstrap.atlassian.net/browse/ELP-2098",
+                        "marks": [
+                          {
+                            "type": "link",
+                            "attrs": {
+                              "href": "https://rootstrap.atlassian.net/browse/ELP-2098"
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "type": "text",
+                        "text": " and "
+                      },
+                      {
+                        "type": "text",
+                        "text": "https://rootstrap.atlassian.net/browse/ELP-2181",
+                        "marks": [
+                          {
+                            "type": "link",
+                            "attrs": {
+                              "href": "https://rootstrap.atlassian.net/browse/ELP-2181"
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "type": "text",
+                        "text": " and "
+                      },
+                      {
+                        "type": "text",
+                        "text": "https://rootstrap.atlassian.net/browse/ELP-2568",
+                        "marks": [
+                          {
+                            "type": "link",
+                            "attrs": {
+                              "href": "https://rootstrap.atlassian.net/browse/ELP-2568"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "listItem",
+                "content": [
+                  {
+                    "type": "paragraph",
+                    "content": [
+                      {
+                        "type": "text",
+                        "text": "Shipments "
+                      },
+                      {
+                        "type": "text",
+                        "text": "https://rootstrap.atlassian.net/browse/ELP-2090",
+                        "marks": [
+                          {
+                            "type": "link",
+                            "attrs": {
+                              "href": "https://rootstrap.atlassian.net/browse/ELP-2090"
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "type": "text",
+                        "text": " and "
+                      },
+                      {
+                        "type": "text",
+                        "text": "https://rootstrap.atlassian.net/browse/ELP-2367",
+                        "marks": [
+                          {
+                            "type": "link",
+                            "attrs": {
+                              "href": "https://rootstrap.atlassian.net/browse/ELP-2367"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "listItem",
+                "content": [
+                  {
+                    "type": "paragraph",
+                    "content": [
+                      {
+                        "type": "text",
+                        "text": "Acknowledge order "
+                      },
+                      {
+                        "type": "text",
+                        "text": "https://rootstrap.atlassian.net/browse/ELP-231",
+                        "marks": [
+                          {
+                            "type": "link",
+                            "attrs": {
+                              "href": "https://rootstrap.atlassian.net/browse/ELP-231"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "status": "Done",
+      "testCases": [],
+      "xrayDetails": {}
+    },
+    {
+      "key": "ELP-3784",
+      "summary": "[Regression] Email Notifications",
+      "description": {
+        "type": "doc",
+        "version": 1,
+        "content": [
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "text",
+                "text": "Send Order Confirmation email "
+              },
+              {
+                "type": "text",
+                "text": "https://rootstrap.atlassian.net/browse/ELP-270",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://rootstrap.atlassian.net/browse/ELP-270"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "User Code creation "
+              },
+              {
+                "type": "text",
+                "text": "https://rootstrap.atlassian.net/browse/ELP-1955",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://rootstrap.atlassian.net/browse/ELP-1955"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "Welcome Email (New User) "
+              },
+              {
+                "type": "text",
+                "text": "https://rootstrap.atlassian.net/browse/ELP-2173",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://rootstrap.atlassian.net/browse/ELP-2173"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "Forgot and Reset Password "
+              },
+              {
+                "type": "text",
+                "text": "https://rootstrap.atlassian.net/browse/ELP-86",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://rootstrap.atlassian.net/browse/ELP-86"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "text",
+                "text": " and "
+              },
+              {
+                "type": "text",
+                "text": "https://rootstrap.atlassian.net/browse/ELP-85",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://rootstrap.atlassian.net/browse/ELP-85"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "New Shipment "
+              },
+              {
+                "type": "text",
+                "text": "https://rootstrap.atlassian.net/browse/ELP-2091",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://rootstrap.atlassian.net/browse/ELP-2091"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "Resend Shipment "
+              },
+              {
+                "type": "text",
+                "text": "https://rootstrap.atlassian.net/browse/ELP-2092",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://rootstrap.atlassian.net/browse/ELP-2092"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "status": "Done",
+      "testCases": [],
+      "xrayDetails": {}
+    },
+    {
+      "key": "ELP-4034",
+      "summary": "[Regression] Inventory and sync promo standard",
+      "description": {
+        "type": "doc",
+        "version": 1,
+        "content": [
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "text",
+                "text": "Add variants to inventory: "
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "https://rootstrap.atlassian.net/browse/ELP-2782",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://rootstrap.atlassian.net/browse/ELP-2782"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "https://rootstrap.atlassian.net/browse/ELP-182",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://rootstrap.atlassian.net/browse/ELP-182"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "text",
+                "text": "Create manual and automatic transactions:"
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "https://rootstrap.atlassian.net/browse/ELP-234",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://rootstrap.atlassian.net/browse/ELP-234"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "https://rootstrap.atlassian.net/browse/ELP-3214",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://rootstrap.atlassian.net/browse/ELP-3214"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "text",
+                "text": "To see stock visibility restrictions  <3:"
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "https://rootstrap.atlassian.net/browse/ELP-3213",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://rootstrap.atlassian.net/browse/ELP-3213"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "text",
+                "text": "Validate match between supplier and admin, check if suppliers sizes, colors, stock and brands are being updated as expected:"
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "text",
+                "text": "https://rootstrap.atlassian.net/browse/ELP-3558",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://rootstrap.atlassian.net/browse/ELP-3558"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "text",
+                "text": " "
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "text",
+                "text": "https://rootstrap.atlassian.net/browse/ELP-3621",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://rootstrap.atlassian.net/browse/ELP-3621"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "text",
+                "text": "https://rootstrap.atlassian.net/browse/ELP-2863",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://rootstrap.atlassian.net/browse/ELP-2863"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "text",
+                "text": "  "
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "text",
+                "text": "https://rootstrap.atlassian.net/browse/ELP-3763",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://rootstrap.atlassian.net/browse/ELP-3763"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "status": "To Do",
+      "testCases": [],
+      "xrayDetails": {}
+    },
+    {
+      "key": "ELP-3768",
+      "summary": "[Regression] Logos",
+      "description": {
+        "type": "doc",
+        "version": 1,
+        "content": [
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "text",
+                "text": "Create logo set by location with color set name "
+              },
+              {
+                "type": "inlineCard",
+                "attrs": {
+                  "url": "https://rootstrap.atlassian.net/browse/ELP-237"
+                }
+              },
+              {
+                "type": "text",
+                "text": " "
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "Add logos to Logo set "
+              },
+              {
+                "type": "inlineCard",
+                "attrs": {
+                  "url": "https://rootstrap.atlassian.net/browse/ELP-238"
+                }
+              },
+              {
+                "type": "text",
+                "text": " "
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "Validate logo set key and logo key "
+              },
+              {
+                "type": "inlineCard",
+                "attrs": {
+                  "url": "https://rootstrap.atlassian.net/browse/ELP-2994"
+                }
+              },
+              {
+                "type": "text",
+                "text": " "
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "Change default background"
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "text",
+                "text": "To see the Logos in corresponding products in store "
+              },
+              {
+                "type": "inlineCard",
+                "attrs": {
+                  "url": "https://rootstrap.atlassian.net/browse/ELP-172"
+                }
+              },
+              {
+                "type": "text",
+                "text": " "
+              }
+            ]
+          }
+        ]
+      },
+      "status": "To Do",
+      "testCases": [],
+      "xrayDetails": {}
+    },
+    {
+      "key": "ELP-3778",
+      "summary": "[Regression] Customers",
+      "description": {
+        "type": "doc",
+        "version": 1,
+        "content": [
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "text",
+                "text": "View List "
+              },
+              {
+                "type": "text",
+                "text": "https://rootstrap.atlassian.net/browse/ELP-1833",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://rootstrap.atlassian.net/browse/ELP-1833"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "Add "
+              },
+              {
+                "type": "text",
+                "text": "https://rootstrap.atlassian.net/browse/ELP-2167",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://rootstrap.atlassian.net/browse/ELP-2167"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "Edit "
+              },
+              {
+                "type": "text",
+                "text": "https://rootstrap.atlassian.net/browse/ELP-2168",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://rootstrap.atlassian.net/browse/ELP-2168"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "Reset Password "
+              },
+              {
+                "type": "text",
+                "text": "https://rootstrap.atlassian.net/browse/ELP-2170",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://rootstrap.atlassian.net/browse/ELP-2170"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "See Orders "
+              },
+              {
+                "type": "text",
+                "text": "https://rootstrap.atlassian.net/browse/ELP-2165",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://rootstrap.atlassian.net/browse/ELP-2165"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "status": "To Do",
+      "testCases": [],
+      "xrayDetails": {}
+    },
+    {
+      "key": "ELP-3773",
+      "summary": "[Regression] Store Shipping Settings",
+      "description": {
+        "type": "doc",
+        "version": 1,
+        "content": [
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "text",
+                "text": "Set Shipping Configurations"
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "inlineCard",
+                "attrs": {
+                  "url": "https://rootstrap.atlassian.net/browse/ELP-153"
+                }
+              },
+              {
+                "type": "text",
+                "text": " "
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "inlineCard",
+                "attrs": {
+                  "url": "https://rootstrap.atlassian.net/browse/ELP-2739"
+                }
+              },
+              {
+                "type": "text",
+                "text": " "
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "inlineCard",
+                "attrs": {
+                  "url": "https://rootstrap.atlassian.net/browse/ELP-3638"
+                }
+              },
+              {
+                "type": "text",
+                "text": " "
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "text",
+                "text": "See those configs at the store: "
+              },
+              {
+                "type": "inlineCard",
+                "attrs": {
+                  "url": "https://rootstrap.atlassian.net/browse/ELP-58"
+                }
+              },
+              {
+                "type": "text",
+                "text": " "
+              }
+            ]
+          }
+        ]
+      },
+      "status": "To Do",
+      "testCases": [],
+      "xrayDetails": {}
+    },
+    {
+      "key": "ELP-3777",
+      "summary": "[Regression] Deployments (single and bulk)",
+      "description": {
+        "type": "doc",
+        "version": 1,
+        "content": [
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "text",
+                "text": "Bulk: deploy to all locations of a store and to several correctly configured stores (all locations):"
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "https://rootstrap.atlassian.net/browse/ELP-1587",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://rootstrap.atlassian.net/browse/ELP-1587"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "https://rootstrap.atlassian.net/browse/ELP-1588",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://rootstrap.atlassian.net/browse/ELP-1588"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "https://rootstrap.atlassian.net/browse/ELP-162",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://rootstrap.atlassian.net/browse/ELP-162"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "https://rootstrap.atlassian.net/browse/ELP-163",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://rootstrap.atlassian.net/browse/ELP-163"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "hardBreak"
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "text",
+                "text": "Single: to add new products to different locations in a store (store>products tab)"
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "https://rootstrap.atlassian.net/browse/ELP-1912",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://rootstrap.atlassian.net/browse/ELP-1912"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "status": "To Do",
+      "testCases": [],
+      "xrayDetails": {}
+    },
+    {
+      "key": "ELP-3758",
+      "summary": "[Regression] Stores (Setup)",
+      "description": {
+        "type": "doc",
+        "version": 1,
+        "content": [
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "text",
+                "text": "Crear store, Live Settings, Test Mode Store."
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "text",
+                "text": "Related tickets:"
+              },
+              {
+                "type": "hardBreak"
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "text",
+                "text": "https://rootstrap.atlassian.net/browse/ELP-1940",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://rootstrap.atlassian.net/browse/ELP-1940"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "https://rootstrap.atlassian.net/browse/ELP-2089",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://rootstrap.atlassian.net/browse/ELP-2089"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "https://rootstrap.atlassian.net/browse/ELP-111",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://rootstrap.atlassian.net/browse/ELP-111"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "inlineCard",
+                "attrs": {
+                  "url": "https://rootstrap.atlassian.net/browse/ELP-91"
+                }
+              },
+              {
+                "type": "text",
+                "text": " "
+              }
+            ]
+          }
+        ]
+      },
+      "status": "Done",
+      "testCases": [],
+      "xrayDetails": {}
+    },
+    {
+      "key": "ELP-3759",
+      "summary": "[Regression] Stores (Themes)",
+      "description": {
+        "type": "doc",
+        "version": 1,
+        "content": [
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "text",
+                "text": "Includes:"
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "Color Theme: "
+              },
+              {
+                "type": "text",
+                "text": "https://rootstrap.atlassian.net/browse/ELP-118",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://rootstrap.atlassian.net/browse/ELP-118"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "Site Font: "
+              },
+              {
+                "type": "inlineCard",
+                "attrs": {
+                  "url": "https://rootstrap.atlassian.net/browse/ELP-119"
+                }
+              },
+              {
+                "type": "text",
+                "text": " "
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "Header: "
+              },
+              {
+                "type": "text",
+                "text": "https://rootstrap.atlassian.net/browse/ELP-120",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://rootstrap.atlassian.net/browse/ELP-120"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "Main Top Navigation: "
+              },
+              {
+                "type": "inlineCard",
+                "attrs": {
+                  "url": "https://rootstrap.atlassian.net/browse/ELP-121"
+                }
+              },
+              {
+                "type": "text",
+                "text": " "
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "Footer:"
+              },
+              {
+                "type": "inlineCard",
+                "attrs": {
+                  "url": "https://rootstrap.atlassian.net/browse/ELP-124"
+                }
+              },
+              {
+                "type": "text",
+                "text": " "
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "Home Page: "
+              },
+              {
+                "type": "inlineCard",
+                "attrs": {
+                  "url": "https://rootstrap.atlassian.net/browse/ELP-125"
+                }
+              },
+              {
+                "type": "text",
+                "text": " "
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "Product Page:"
+              },
+              {
+                "type": "inlineCard",
+                "attrs": {
+                  "url": "https://rootstrap.atlassian.net/browse/ELP-2904"
+                }
+              },
+              {
+                "type": "text",
+                "text": " "
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "Catalog Page: "
+              },
+              {
+                "type": "inlineCard",
+                "attrs": {
+                  "url": "https://rootstrap.atlassian.net/browse/ELP-126"
+                }
+              },
+              {
+                "type": "text",
+                "text": " "
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "Shipping Address: "
+              },
+              {
+                "type": "inlineCard",
+                "attrs": {
+                  "url": "https://rootstrap.atlassian.net/browse/ELP-2371"
+                }
+              },
+              {
+                "type": "text",
+                "text": "  "
+              },
+              {
+                "type": "text",
+                "text": "https://rootstrap.atlassian.net/browse/ELP-2370",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://rootstrap.atlassian.net/browse/ELP-2370"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "text",
+                "text": " "
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "Order Review:"
+              },
+              {
+                "type": "inlineCard",
+                "attrs": {
+                  "url": "https://rootstrap.atlassian.net/browse/ELP-135"
+                }
+              },
+              {
+                "type": "text",
+                "text": " "
+              },
+              {
+                "type": "inlineCard",
+                "attrs": {
+                  "url": "https://rootstrap.atlassian.net/browse/ELP-2374"
+                }
+              },
+              {
+                "type": "text",
+                "text": " "
+              }
+            ]
+          }
+        ]
+      },
+      "status": "Done",
+      "testCases": [],
+      "xrayDetails": {}
+    },
+    {
+      "key": "ELP-4391",
+      "summary": "[Regression] Providers APIs Integration",
+      "description": {
+        "type": "doc",
+        "version": 1,
+        "content": [
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "text",
+                "text": "https://rootstrap.atlassian.net/browse/ELP-2711",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://rootstrap.atlassian.net/browse/ELP-2711"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "status": "Done",
+      "testCases": [],
+      "xrayDetails": {}
+    },
+    {
+      "key": "ELP-3767",
+      "summary": "[Regression] Master Categories",
+      "description": {
+        "type": "doc",
+        "version": 1,
+        "content": [
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "text",
+                "text": "Category Creation: "
+              },
+              {
+                "type": "text",
+                "text": "https://rootstrap.atlassian.net/browse/ELP-169",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://rootstrap.atlassian.net/browse/ELP-169"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "text",
+                "text": " "
+              },
+              {
+                "type": "inlineCard",
+                "attrs": {
+                  "url": "https://rootstrap.atlassian.net/browse/ELP-199"
+                }
+              },
+              {
+                "type": "text",
+                "text": " "
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "Categories in store and Copy products from another location and copy the categories: "
+              },
+              {
+                "type": "inlineCard",
+                "attrs": {
+                  "url": "https://rootstrap.atlassian.net/browse/ELP-51"
+                }
+              },
+              {
+                "type": "text",
+                "text": " "
+              },
+              {
+                "type": "inlineCard",
+                "attrs": {
+                  "url": "https://rootstrap.atlassian.net/browse/ELP-203"
+                }
+              },
+              {
+                "type": "text",
+                "text": " "
+              },
+              {
+                "type": "hardBreak"
+              }
+            ]
+          }
+        ]
+      },
+      "status": "To Do",
+      "testCases": [],
+      "xrayDetails": {}
+    },
+    {
+      "key": "ELP-3793",
+      "summary": "[Regression] Master Products",
+      "description": {
+        "type": "doc",
+        "version": 1,
+        "content": [
+          {
+            "type": "paragraph"
+          },
+          {
+            "type": "bulletList",
+            "content": [
+              {
+                "type": "listItem",
+                "content": [
+                  {
+                    "type": "paragraph",
+                    "content": [
+                      {
+                        "type": "text",
+                        "text": "Create Master Product: "
+                      },
+                      {
+                        "type": "hardBreak"
+                      },
+                      {
+                        "type": "text",
+                        "text": "Apparel with Pricing Method Standard"
+                      },
+                      {
+                        "type": "hardBreak"
+                      },
+                      {
+                        "type": "text",
+                        "text": "Apparel with Pricing Method Quantity"
+                      },
+                      {
+                        "type": "hardBreak"
+                      },
+                      {
+                        "type": "text",
+                        "text": "Hard Good with Pricing Method Standard"
+                      },
+                      {
+                        "type": "hardBreak"
+                      },
+                      {
+                        "type": "text",
+                        "text": "Hard Good with Pricing Method Quantity"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "listItem",
+                "content": [
+                  {
+                    "type": "paragraph",
+                    "content": [
+                      {
+                        "type": "text",
+                        "text": "Deploy to store (Deploy is out of the scope of tis execution)"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "listItem",
+                "content": [
+                  {
+                    "type": "paragraph",
+                    "content": [
+                      {
+                        "type": "text",
+                        "text": "Edit a Master Product and redeploy to store to see changes:"
+                      },
+                      {
+                        "type": "hardBreak"
+                      },
+                      {
+                        "type": "text",
+                        "text": "Master Category"
+                      },
+                      {
+                        "type": "hardBreak"
+                      },
+                      {
+                        "type": "text",
+                        "text": "Visibility checkbox"
+                      },
+                      {
+                        "type": "hardBreak"
+                      },
+                      {
+                        "type": "text",
+                        "text": "Attributes"
+                      },
+                      {
+                        "type": "hardBreak"
+                      },
+                      {
+                        "type": "text",
+                        "text": "Images & Logo positions"
+                      },
+                      {
+                        "type": "hardBreak"
+                      },
+                      {
+                        "type": "text",
+                        "text": "Pricing"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "text",
+                "text": "Related tickets (pending add TCs to this TE see sprint 04):"
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "inlineCard",
+                "attrs": {
+                  "url": "https://rootstrap.atlassian.net/browse/ELP-202"
+                }
+              },
+              {
+                "type": "text",
+                "text": " "
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "inlineCard",
+                "attrs": {
+                  "url": "https://rootstrap.atlassian.net/browse/ELP-982"
+                }
+              },
+              {
+                "type": "text",
+                "text": "  "
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "inlineCard",
+                "attrs": {
+                  "url": "https://rootstrap.atlassian.net/browse/ELP-212"
+                }
+              },
+              {
+                "type": "text",
+                "text": "  "
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "inlineCard",
+                "attrs": {
+                  "url": "https://rootstrap.atlassian.net/browse/ELP-210"
+                }
+              },
+              {
+                "type": "text",
+                "text": " "
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "inlineCard",
+                "attrs": {
+                  "url": "https://rootstrap.atlassian.net/browse/ELP-1012"
+                }
+              },
+              {
+                "type": "text",
+                "text": " "
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "inlineCard",
+                "attrs": {
+                  "url": "https://rootstrap.atlassian.net/browse/ELP-216"
+                }
+              },
+              {
+                "type": "text",
+                "text": " "
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "inlineCard",
+                "attrs": {
+                  "url": "https://rootstrap.atlassian.net/browse/ELP-1193"
+                }
+              },
+              {
+                "type": "text",
+                "text": " "
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "inlineCard",
+                "attrs": {
+                  "url": "https://rootstrap.atlassian.net/browse/ELP-218"
+                }
+              },
+              {
+                "type": "text",
+                "text": " "
+              }
+            ]
+          }
+        ]
+      },
+      "status": "Done",
+      "testCases": [],
+      "xrayDetails": {}
+    },
+    {
+      "key": "ELP-4296",
+      "summary": "[Regression] Pages",
+      "description": {
+        "type": "doc",
+        "version": 1,
+        "content": [
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "text",
+                "text": "Includes: "
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "Pages index",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://rootstrap.atlassian.net/browse/ELP-3674"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "CRUD Child Pages",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://rootstrap.atlassian.net/browse/ELP-3724"
+                    }
+                  },
+                  {
+                    "type": "underline"
+                  }
+                ]
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "CRUD Parent Pages",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://rootstrap.atlassian.net/browse/ELP-3675"
+                    }
+                  },
+                  {
+                    "type": "underline"
+                  }
+                ]
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "Improve CompanyStore Themes Main Top Navigation and Footer section to use Pages",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://rootstrap.atlassian.net/browse/ELP-3765"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "text",
+                "text": " → Top and Footer pages options integration with pages. "
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "Send Pages Info to FE",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://rootstrap.atlassian.net/browse/ELP-3677"
+                    }
+                  },
+                  {
+                    "type": "underline"
+                  }
+                ]
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "[FE] Integrate \"slide_show\" pages",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://rootstrap.atlassian.net/browse/ELP-2877"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "[FE] Integrate \"static\" pages",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://rootstrap.atlassian.net/browse/ELP-2876"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "[FE] integrate \"more_products\" pages",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://rootstrap.atlassian.net/browse/ELP-2879"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "[FE] integrate \"welcome\" pages",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://rootstrap.atlassian.net/browse/ELP-2880"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "Pages validations",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://rootstrap.atlassian.net/browse/ELP-3766"
+                    }
+                  },
+                  {
+                    "type": "underline"
+                  }
+                ]
+              },
+              {
+                "type": "text",
+                "text": " → validations and restrictions within pages"
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "Fix and Improve ActionText Trix",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://rootstrap.atlassian.net/browse/ELP-3750"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "[BE] Indetify which Static ChildPage shows on Footer and NavBar",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://rootstrap.atlassian.net/browse/ELP-4041"
+                    }
+                  },
+                  {
+                    "type": "underline"
+                  }
+                ]
+              },
+              {
+                "type": "hardBreak"
+              },
+              {
+                "type": "text",
+                "text": "[FE] Integrate \"new_favorites\" pages",
+                "marks": [
+                  {
+                    "type": "link",
+                    "attrs": {
+                      "href": "https://rootstrap.atlassian.net/browse/ELP-3442"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "text",
+                "text": " "
+              }
+            ]
+          }
+        ]
+      },
+      "status": "To Do",
+      "testCases": [],
+      "xrayDetails": {}
+    }
+  ],
+  "summary": {
+    "totalTestExecutions": 0,
+    "totalTestCases": 0,
+    "cucumberTests": 0,
+    "xrayTestExecutions": 0,
+    "csvTestExecutions": 18
+  }
+}

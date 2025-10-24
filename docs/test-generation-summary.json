@@ -1,0 +1,17 @@
+{
+  "generatedAt": "2025-10-18T02:34:44.578Z",
+  "testPlan": null,
+  "xrayResults": {
+    "totalTestExecutions": 0,
+    "csvTestExecutions": 0,
+    "remainingTestExecutions": 0,
+    "totalTestCases": 0,
+    "cucumberTests": 0
+  },
+  "regressionPlan": {
+    "totalAreas": 30,
+    "componentIntegration": 18,
+    "e2e": 11
+  },
+  "generatedFiles": []
+}

@@ -11,15 +11,15 @@ class LoginPage {
 
   // Form Elements
   getEmailInput() {
-    return cy.get('[data-cy="email-input"]')
+    return cy.get('input[type="email"]')
   }
 
   getPasswordInput() {
-    return cy.get('[data-cy="password-input"]')
+    return cy.get('input[type="password"]')
   }
 
   getLoginButton() {
-    return cy.get('[data-cy="login-button"]')
+    return cy.get('button[type="submit"]')
   }
 
   // Messages
