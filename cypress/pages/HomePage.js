@@ -1,7 +1,9 @@
 /**
- * Homepage Page Object
+ * Homepage Page Object - Optimized
  * Rule 06: Page Objects - Class-based, atomic UI actions only, no assertions
  */
+
+const { commonHelpers } = require('../support/common-helpers')
 
 class HomePage {
   // Navigation
@@ -58,16 +60,16 @@ class HomePage {
 
   // Verification methods (for actions to use)
   verifyPageLoaded() {
-    this.getBody().should('be.visible')
+    commonHelpers.waitForElementReady('body')
     cy.url().should('include', Cypress.config('baseUrl'))
   }
 
   verifyHeaderPresent() {
-    this.getHeader().should('exist')
+    commonHelpers.verifyElementExists('header', 'Header')
   }
 
   verifyContentPresent() {
-    this.getBody().should('be.visible').and('not.be.empty')
+    commonHelpers.waitForElementReady('body')
   }
 
   verifyUserAuthenticated(userName) {
@@ -135,6 +137,32 @@ class HomePage {
         cy.log('✅ Staying on Cleveland Hospital page as expected')
       }
     })
+  }
+
+  // Simplified Navbar Navigation Methods - Using common helpers
+  getNavbarLinks() {
+    return cy.get('nav a, header nav a, .navbar a, [role="navigation"] a')
+      .not('[href="#"]')
+      .not('[href=""]')
+  }
+
+  clickNavbarLink(linkText) {
+    cy.log(`🔗 Clicking navbar link: "${linkText}"`)
+    
+    cy.get('header nav div ul a, header nav ul a')
+      .contains(linkText)
+      .should('be.visible')
+      .click()
+  }
+
+  navigateToNavbarLinkAndVerifyH1(linkText) {
+    cy.log(`🧭 Navigating to navbar link: "${linkText}"`)
+    
+    this.clickNavbarLink(linkText)
+    commonHelpers.waitForNavigation()
+    commonHelpers.validateH1Match(linkText)
+    
+    cy.log(`✅ Successfully navigated to "${linkText}" and verified h1`)
   }
 }
 
