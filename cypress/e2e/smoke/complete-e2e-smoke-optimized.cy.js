@@ -3,7 +3,7 @@
  * Single file containing all smoke tests for the eLeadPromo application
  * AMBIENTE: QA
  * URL: https://tienda1.qa.eleaddev.com
- * 
+ *
  * Optimized with helper functions to eliminate code duplication
  */
 
@@ -11,7 +11,9 @@ const { userJourneyActions } = require('../../actions/user-journey.actions')
 const { authHelpers } = require('../../support/auth-helpers')
 const { navbarHelpers } = require('../../support/navbar-helpers')
 const { newFavoritesHelpers } = require('../../support/new-favorites-helpers')
-const { lookingForMoreOptionsHelpers } = require('../../support/looking-for-more-options-helpers')
+const {
+  lookingForMoreOptionsHelpers,
+} = require('../../support/looking-for-more-options-helpers')
 const { footerHelpers } = require('../../support/footer-helpers')
 
 describe('Complete E2E Smoke Test Suite - Optimized', () => {
@@ -39,7 +41,9 @@ describe('Complete E2E Smoke Test Suite - Optimized', () => {
 
       userJourneyActions.signUpFromHomepage({ password: 'Testing2!' })
 
-      cy.log('✅ Sign-up successful - validating registered user name top right')
+      cy.log(
+        '✅ Sign-up successful - validating registered user name top right',
+      )
       userJourneyActions.validateRegisteredUserAndLogout('Test User')
 
       cy.log('📋 Proceeding with login flow: invalid then valid user')
@@ -47,7 +51,9 @@ describe('Complete E2E Smoke Test Suite - Optimized', () => {
         userJourneyActions.completeUserJourney(testData)
       })
 
-      cy.log('✅ Full auth flow complete: sign up, logout, invalid login, valid login')
+      cy.log(
+        '✅ Full auth flow complete: sign up, logout, invalid login, valid login',
+      )
     })
 
     it('should complete full user journey from homepage to authenticated store access', () => {
@@ -66,15 +72,15 @@ describe('Complete E2E Smoke Test Suite - Optimized', () => {
       // Load test data from fixture
       cy.fixture('test-user').then((testData) => {
         cy.log('📋 Test data loaded from fixture')
-        
+
         // Ensure user is authenticated
         authHelpers.ensureAuthenticated(testData)
-        
+
         // Test all navbar links with H1 validation
         navbarHelpers.testAllNavbarLinks()
-        
+
         cy.log('✅ Navbar H1 validation complete')
-        
+
         // Test the "New Favorites" section
         newFavoritesHelpers.testCompleteSection()
       })
@@ -86,33 +92,35 @@ describe('Complete E2E Smoke Test Suite - Optimized', () => {
       // Load test data from fixture
       cy.fixture('test-user').then((testData) => {
         cy.log('📋 Test data loaded from fixture')
-        
+
         // Ensure user is authenticated
         authHelpers.ensureAuthenticated(testData)
-        
+
         // Click first product
         newFavoritesHelpers.clickFirstProduct()
-        
+
         // Return to homepage
         authHelpers.returnToHomepage()
-        
+
         cy.log('✅ Product click test complete')
       })
     })
 
     it('should test "Looking for more options?" section with clickable images', () => {
-      cy.log('🔍 Testing "Looking for more options?" section with clickable images')
+      cy.log(
+        '🔍 Testing "Looking for more options?" section with clickable images',
+      )
 
       // Load test data from fixture
       cy.fixture('test-user').then((testData) => {
         cy.log('📋 Test data loaded from fixture')
-        
+
         // Ensure user is authenticated
         authHelpers.ensureAuthenticated(testData)
-        
+
         // Test the complete "Looking for more options?" section
         lookingForMoreOptionsHelpers.testCompleteSection()
-        
+
         cy.log('✅ "Looking for more options?" section test complete')
       })
     })
@@ -121,15 +129,15 @@ describe('Complete E2E Smoke Test Suite - Optimized', () => {
       cy.log('🔍 Testing footer functionality with configurable links')
 
       // Load test data from fixture
-      cy.fixture('test-user').then((testData) => {
+      cy.fixture('test-user').then(() => {
         cy.log('📋 Test data loaded from fixture')
-        
+
         // Ensure homepage is loaded (no authentication required for footer)
         authHelpers.ensureHomepageLoaded()
-        
+
         // Test the complete footer functionality
         footerHelpers.testCompleteFooter()
-        
+
         cy.log('✅ Footer functionality test complete')
       })
     })

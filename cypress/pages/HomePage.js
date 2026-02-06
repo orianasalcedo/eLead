@@ -16,6 +16,11 @@ class HomePage {
     return cy.get('body')
   }
 
+  /** Brand/logo image (e.g. img[alt*="Company brand"]) for clickability check */
+  getBrandImage() {
+    return cy.get('img[alt*="Company brand"]')
+  }
+
   getHeader() {
     return cy.get('header, [role="banner"], nav')
   }
@@ -52,7 +57,9 @@ class HomePage {
   }
 
   getNavigationElement() {
-    return cy.get('body > div > div.flex.min-h-screen.flex-col.items-center.justify-between > div > header > div > nav > div:nth-child(1) > ul')
+    return cy.get(
+      'body > div > div.flex.min-h-screen.flex-col.items-center.justify-between > div > header > div > nav > div:nth-child(1) > ul',
+    )
   }
 
   getH2Elements() {
@@ -110,19 +117,24 @@ class HomePage {
 
   verifyHomepageContent(expectedTexts) {
     this.getBody().then(($body) => {
-      const foundTexts = expectedTexts.filter(text => 
-        $body.find('h2').filter((i, el) => 
-          Cypress.$(el).text().toLowerCase().includes(text.toLowerCase())
-        ).length > 0
+      const foundTexts = expectedTexts.filter(
+        (text) =>
+          $body
+            .find('h2')
+            .filter((i, el) =>
+              Cypress.$(el).text().toLowerCase().includes(text.toLowerCase()),
+            ).length > 0,
       )
-      
+
       if (foundTexts.length > 0) {
         cy.log(`✅ Homepage content verified - found: ${foundTexts.join(', ')}`)
       } else {
-        cy.log('⚠️ Expected homepage h2 elements not found, but continuing test')
+        cy.log(
+          '⚠️ Expected homepage h2 elements not found, but continuing test',
+        )
       }
     })
-    
+
     // Alternative robust validation
     this.getH2Elements().should('exist').and('be.visible')
     cy.log('✅ Homepage h2 elements are present and visible')
@@ -145,13 +157,15 @@ class HomePage {
     cy.get('img[alt*="Company brand"]').then(($img) => {
       const $parent = $img.parent()
       const altText = $img.attr('alt')
-      const isClickable = altText.includes('clickable') || 
-                         $parent.is('a') || $parent.is('button') || 
-                         $parent.css('cursor') === 'pointer' ||
-                         $img.css('cursor') === 'pointer'
-      
+      const isClickable =
+        altText.includes('clickable') ||
+        $parent.is('a') ||
+        $parent.is('button') ||
+        $parent.css('cursor') === 'pointer' ||
+        $img.css('cursor') === 'pointer'
+
       cy.log(`🔍 Brand element found with alt: "${altText}"`)
-      
+
       if (isClickable) {
         cy.log('✅ Brand element is clickeable - testing navigation')
         cy.wrap($img).click()
@@ -169,14 +183,15 @@ class HomePage {
 
   // Simplified Navbar Navigation Methods - Using common helpers
   getNavbarLinks() {
-    return cy.get('nav a, header nav a, .navbar a, [role="navigation"] a')
+    return cy
+      .get('nav a, header nav a, .navbar a, [role="navigation"] a')
       .not('[href="#"]')
       .not('[href=""]')
   }
 
   clickNavbarLink(linkText) {
     cy.log(`🔗 Clicking navbar link: "${linkText}"`)
-    
+
     cy.get('header nav div ul a, header nav ul a')
       .contains(linkText)
       .should('be.visible')
@@ -185,11 +200,11 @@ class HomePage {
 
   navigateToNavbarLinkAndVerifyH1(linkText) {
     cy.log(`🧭 Navigating to navbar link: "${linkText}"`)
-    
+
     this.clickNavbarLink(linkText)
     commonHelpers.waitForNavigation()
     commonHelpers.validateH1Match(linkText)
-    
+
     cy.log(`✅ Successfully navigated to "${linkText}" and verified h1`)
   }
 }

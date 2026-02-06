@@ -15,14 +15,14 @@ const authHelpers = {
    */
   ensureAuthenticated(testData) {
     cy.log('🔐 Ensuring user authentication')
-    
+
     const homepage = new HomePage()
-    
+
     // Visit homepage and handle initial setup
     homepage.visit()
     homepage.handleWelcomeModal()
     homepage.verifyPageLoaded()
-    
+
     // Check authentication status
     cy.get('body').then(($body) => {
       if ($body.text().includes('Log in')) {
@@ -32,7 +32,7 @@ const authHelpers = {
         cy.log('✅ User already authenticated')
       }
     })
-    
+
     // Wait for page to be ready using common helper
     commonHelpers.waitForElementReady('body')
     commonHelpers.waitForElementReady('header')
@@ -44,18 +44,18 @@ const authHelpers = {
    */
   ensureHomepageLoaded() {
     cy.log('🏠 Ensuring homepage is loaded')
-    
+
     const homepage = new HomePage()
-    
+
     // Visit homepage and handle initial setup
     homepage.visit()
     homepage.handleWelcomeModal()
     homepage.verifyPageLoaded()
-    
+
     // Wait for page to be ready using common helper
     commonHelpers.waitForElementReady('body')
     commonHelpers.waitForElementReady('header')
-    
+
     cy.log('✅ Homepage loaded and ready')
   },
 
@@ -66,14 +66,14 @@ const authHelpers = {
   performLogin(testData) {
     const homepage = new HomePage()
     const loginPage = new LoginPage()
-    
+
     homepage.clickLoginLink()
     cy.url().should('include', '/login')
     loginPage.clickLogInTab()
-    
+
     loginPage.fillLoginForm(testData.testUser.email, testData.testUser.password)
     loginPage.submitForm()
-    
+
     cy.url().should('include', Cypress.config('baseUrl'))
     cy.url().should('not.include', '/login')
     cy.log('✅ Authentication successful')
@@ -84,7 +84,7 @@ const authHelpers = {
    */
   returnToHomepage() {
     commonHelpers.returnToHomepage()
-  }
+  },
 }
 
 module.exports = { authHelpers }

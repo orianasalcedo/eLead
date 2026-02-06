@@ -9,16 +9,17 @@ import './commands'
 // No need for manual cleanup in beforeEach
 
 // Disable uncaught exception handling for React errors
-Cypress.on('uncaught:exception', (err, runnable) => {
+Cypress.on('uncaught:exception', (err) => {
   // Don't fail tests on React errors
-  if (err.message.includes('Minified React error') || 
-      err.message.includes('React error') ||
-      err.message.includes('418')) {
+  if (
+    err.message.includes('Minified React error') ||
+    err.message.includes('React error') ||
+    err.message.includes('418')
+  ) {
     return false
   }
   // Don't fail tests on network errors
-  if (err.message.includes('Network Error') ||
-      err.message.includes('fetch')) {
+  if (err.message.includes('Network Error') || err.message.includes('fetch')) {
     return false
   }
   // Don't fail tests on ResizeObserver errors

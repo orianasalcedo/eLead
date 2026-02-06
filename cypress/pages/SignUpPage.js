@@ -12,32 +12,46 @@ class SignUpPage {
     return cy.contains('button', 'Register').first()
   }
 
+  /** Wait for sign-up form first name field to be visible (no assertion in action layer) */
+  waitForSignUpFormVisible() {
+    cy.get(
+      'input[placeholder*="first name"], input[placeholder*="First name"], input[name="firstName"]',
+    )
+      .first()
+      .should('be.visible')
+  }
+
   clickSignUpTab() {
     this.getSignUpTab().click()
   }
 
   fillFirstName(value) {
-    cy.get('input[placeholder*="first name"], input[placeholder*="First name"], input[name="firstName"], input[name="first_name"]').first().clear().type(value)
+    const sel =
+      'input[placeholder*="first name"], input[placeholder*="First name"], input[name="firstName"], input[name="first_name"]'
+    cy.get(sel).first().clear()
+    cy.get(sel).first().type(value)
   }
 
   fillLastName(value) {
-    cy.get('input[placeholder*="last name"], input[placeholder*="Last name"], input[name="lastName"], input[name="last_name"]').first().clear().type(value)
+    const sel =
+      'input[placeholder*="last name"], input[placeholder*="Last name"], input[name="lastName"], input[name="last_name"]'
+    cy.get(sel).first().clear()
+    cy.get(sel).first().type(value)
   }
 
   fillEmail(value) {
-    // Email field in sign-up form - clear first in case it's pre-filled
-    cy.get('input[type="email"]').first().clear().type(value)
+    cy.get('input[type="email"]').first().clear()
+    cy.get('input[type="email"]').first().type(value)
   }
 
   fillPassword(value) {
-    // After clicking SIGN UP tab, the sign-up form should be visible
-    // Get all password fields and use the first one (password field)
-    cy.get('input[type="password"]').first().clear().type(value, { log: false })
+    cy.get('input[type="password"]').first().clear()
+    cy.get('input[type="password"]').first().type(value, { log: false })
   }
 
   fillConfirmPassword(value) {
-    // After clicking SIGN UP tab, get the second password field (confirm password)
-    cy.get('input[type="password"]').eq(1).clear().type(value, { log: false })
+    cy.get('input[type="password"]').eq(1).clear()
+    cy.get('input[type="password"]').eq(1).type(value, { log: false })
   }
 
   clickRegister() {

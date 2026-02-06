@@ -9,16 +9,17 @@ const { commonHelpers } = require('./common-helpers')
 Cypress.Commands.add('verifyHomepageLoaded', () => {
   commonHelpers.waitForElementReady('body')
   commonHelpers.waitForElementReady('header')
-  
+
   // Check for homepage-specific content (flexible approach)
   cy.get('body').then(($body) => {
     const bodyText = $body.text()
-    const isHomepage = bodyText.includes('Log in') || 
-                      bodyText.includes('Welcome') || 
-                      bodyText.includes('Home') ||
-                      bodyText.includes('Start Shopping') ||
-                      $body.find('header').length > 0
-    
+    const isHomepage =
+      bodyText.includes('Log in') ||
+      bodyText.includes('Welcome') ||
+      bodyText.includes('Home') ||
+      bodyText.includes('Start Shopping') ||
+      $body.find('header').length > 0
+
     if (isHomepage) {
       cy.log('✅ Homepage verified - homepage-specific content found')
     } else {
@@ -30,7 +31,7 @@ Cypress.Commands.add('verifyHomepageLoaded', () => {
 // Verify page navigation by checking for page-specific content
 Cypress.Commands.add('verifyPageNavigation', (expectedContent) => {
   commonHelpers.waitForElementReady('body')
-  
+
   if (expectedContent) {
     cy.get('body').should('contain.text', expectedContent)
     cy.log(`✅ Page navigation verified - found "${expectedContent}"`)
@@ -54,9 +55,12 @@ Cypress.Commands.add('clearSessionData', () => {
 // Welcome modal handler - Only click if modal is present (optional; site may not show it)
 Cypress.Commands.add('handleWelcomeModal', () => {
   cy.get('body').then(($body) => {
-    const $btn = $body.find('button, a, [role="button"]').filter(function () {
-      return Cypress.$(this).text().includes('Start Shopping')
-    }).first()
+    const $btn = $body
+      .find('button, a, [role="button"]')
+      .filter(function () {
+        return Cypress.$(this).text().includes('Start Shopping')
+      })
+      .first()
     if ($btn.length) {
       cy.log('Welcome modal detected, clicking "Start Shopping"')
       cy.wrap($btn).click({ force: true })
@@ -71,9 +75,12 @@ Cypress.Commands.add('handleWelcomeModal', () => {
 // Do not target .fixed/.overlay/.modal - they match nav/sidebar and stay in DOM.
 Cypress.Commands.add('dismissModal', () => {
   cy.get('body').then(($body) => {
-    const $btn = $body.find('button, a, [role="button"]').filter(function () {
-      return Cypress.$(this).text().includes('Start Shopping')
-    }).first()
+    const $btn = $body
+      .find('button, a, [role="button"]')
+      .filter(function () {
+        return Cypress.$(this).text().includes('Start Shopping')
+      })
+      .first()
     if ($btn.length) {
       cy.log('Dismissing welcome modal with "Start Shopping"')
       cy.wrap($btn).click({ force: true })

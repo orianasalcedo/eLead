@@ -16,11 +16,18 @@ class LoginPage {
 
   // Form Elements: scope to the LOG IN form (has "Log in" submit, not "Register")
   _getLoginForm() {
-    return cy.get('form').filter((i, form) => {
-      const $form = Cypress.$(form)
-      const $btn = $form.find('button[type="submit"]')
-      return $btn.length > 0 && /log\s*in/i.test($btn.text()) && !/register/i.test($btn.text())
-    }).first()
+    return cy
+      .get('form')
+      .filter((i, form) => {
+        const $form = Cypress.$(form)
+        const $btn = $form.find('button[type="submit"]')
+        return (
+          $btn.length > 0 &&
+          /log\s*in/i.test($btn.text()) &&
+          !/register/i.test($btn.text())
+        )
+      })
+      .first()
   }
 
   getEmailInput() {
@@ -28,7 +35,9 @@ class LoginPage {
   }
 
   getPasswordInput() {
-    return this._getLoginForm().find('input[type="password"], input[name="password"]').first()
+    return this._getLoginForm()
+      .find('input[type="password"], input[name="password"]')
+      .first()
   }
 
   getLoginButton() {

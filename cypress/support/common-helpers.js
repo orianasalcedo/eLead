@@ -18,7 +18,7 @@ const commonHelpers = {
    * @param {number} timeout - Timeout in milliseconds (default: 10000)
    */
   waitForNavigation(timeout = 10000) {
-    cy.get('body').should('be.visible')
+    cy.get('body', { timeout }).should('be.visible')
     cy.log('📡 Page navigation completed')
   },
 
@@ -28,35 +28,46 @@ const commonHelpers = {
    * @param {number} timeout - Timeout in milliseconds (default: 10000)
    */
   validateH1Match(expectedText, timeout = 10000) {
-    cy.get('h1', { timeout }).should('exist').then(($h1) => {
-      const h1Text = $h1.text().trim()
-      cy.log(`📋 Page h1: "${h1Text}"`)
-      cy.log(`📋 Expected: "${expectedText}"`)
-      
-      // Flexible comparison (contains or is contained)
-      const expectedLower = expectedText.toLowerCase()
-      const h1TextLower = h1Text.toLowerCase()
-      const textMatch = h1TextLower.includes(expectedLower) || 
-                       expectedLower.includes(h1TextLower)
-      
-      if (textMatch) {
-        cy.log(`✅ H1 match confirmed: "${h1Text}" matches "${expectedText}"`)
-      } else {
-        cy.log(`❌ H1 mismatch: Expected "${expectedText}", found "${h1Text}"`)
-        throw new Error(`H1 mismatch: Expected "${expectedText}", found "${h1Text}"`)
-      }
-    })
+    cy.get('h1', { timeout })
+      .should('exist')
+      .then(($h1) => {
+        const h1Text = $h1.text().trim()
+        cy.log(`📋 Page h1: "${h1Text}"`)
+        cy.log(`📋 Expected: "${expectedText}"`)
+
+        // Flexible comparison (contains or is contained)
+        const expectedLower = expectedText.toLowerCase()
+        const h1TextLower = h1Text.toLowerCase()
+        const textMatch =
+          h1TextLower.includes(expectedLower) ||
+          expectedLower.includes(h1TextLower)
+
+        if (textMatch) {
+          cy.log(`✅ H1 match confirmed: "${h1Text}" matches "${expectedText}"`)
+        } else {
+          cy.log(
+            `❌ H1 mismatch: Expected "${expectedText}", found "${h1Text}"`,
+          )
+          throw new Error(
+            `H1 mismatch: Expected "${expectedText}", found "${h1Text}"`,
+          )
+        }
+      })
   },
 
   /**
    * Validates page content contains expected keywords
    * @param {Array} keywords - Array of keywords to check for
    */
-  validatePageContent(keywords = ['Product ID:', 'Shop', 'Category', 'About', 'Contact']) {
+  validatePageContent(
+    keywords = ['Product ID:', 'Shop', 'Category', 'About', 'Contact'],
+  ) {
     cy.get('body').then(($body) => {
       const bodyText = $body.text()
-      const foundKeywords = keywords.filter(keyword => bodyText.includes(keyword))
-      
+      const foundKeywords = keywords.filter((keyword) =>
+        bodyText.includes(keyword),
+      )
+
       if (foundKeywords.length > 0) {
         cy.log(`✅ Found relevant content: ${foundKeywords.join(', ')}`)
       } else {
@@ -94,14 +105,22 @@ const commonHelpers = {
     const href = $link.attr('href') || 'No href'
     const text = $link.text().trim() || 'No text'
     const isVisible = $link.is(':visible')
-    
-    cy.log(`📋 ${context} ${index}: "${text}" -> ${href} (visible: ${isVisible})`)
-    
+
+    cy.log(
+      `📋 ${context} ${index}: "${text}" -> ${href} (visible: ${isVisible})`,
+    )
+
     return {
       href,
       text,
       isVisible,
-      isValid: isVisible && href && href !== '#' && href !== '' && text.length > 0 && text !== 'No text'
+      isValid:
+        isVisible &&
+        href &&
+        href !== '#' &&
+        href !== '' &&
+        text.length > 0 &&
+        text !== 'No text',
     }
   },
 
@@ -110,10 +129,21 @@ const commonHelpers = {
    * @param {string} text - Text to check
    * @param {Array} skipPatterns - Array of patterns to skip
    */
-  shouldSkipText(text, skipPatterns = ['shops', 'log', 'user', 'cart', 'oriana', 'login', 'logout', 'sony', 'afeela']) {
-    return skipPatterns.some(pattern => 
-      text.toLowerCase().includes(pattern)
-    )
+  shouldSkipText(
+    text,
+    skipPatterns = [
+      'shops',
+      'log',
+      'user',
+      'cart',
+      'oriana',
+      'login',
+      'logout',
+      'sony',
+      'afeela',
+    ],
+  ) {
+    return skipPatterns.some((pattern) => text.toLowerCase().includes(pattern))
   },
 
   /**
@@ -127,7 +157,9 @@ const commonHelpers = {
       if ($element.is(':visible')) {
         cy.log(`✅ ${description} found and visible: ${selector}`)
       } else {
-        cy.log(`⚠️ ${description} found but not visible (may be hidden): ${selector}`)
+        cy.log(
+          `⚠️ ${description} found but not visible (may be hidden): ${selector}`,
+        )
       }
     })
   },
@@ -139,7 +171,7 @@ const commonHelpers = {
    */
   waitForElementReady(selector, timeout = 8000) {
     cy.get(selector, { timeout }).should('exist').and('be.visible')
-  }
+  },
 }
 
 module.exports = { commonHelpers }
