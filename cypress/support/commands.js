@@ -51,50 +51,35 @@ Cypress.Commands.add('clearSessionData', () => {
   cy.log('🧹 Session data cleared - simulating fresh visit')
 })
 
-// Welcome modal handler - Optimized single implementation
+// Welcome modal handler - Only click if modal is present (optional; site may not show it)
 Cypress.Commands.add('handleWelcomeModal', () => {
   cy.get('body').then(($body) => {
-    // Check for welcome modal with "Start Shopping" button
-    if ($body.text().includes('Start Shopping')) {
+    const $btn = $body.find('button, a, [role="button"]').filter(function () {
+      return Cypress.$(this).text().includes('Start Shopping')
+    }).first()
+    if ($btn.length) {
       cy.log('Welcome modal detected, clicking "Start Shopping"')
-      cy.contains('Start Shopping').click({ force: true })
-      // Wait for modal to close using proper assertion
-      cy.contains('Start Shopping').should('not.exist')
+      cy.wrap($btn).click({ force: true })
+      cy.contains('Start Shopping', { timeout: 5000 }).should('not.exist')
     } else {
       cy.log('No welcome modal found - continuing')
     }
   })
 })
 
-// Global modal handler - Comprehensive modal dismissal
+// Only dismiss the welcome modal ("Start Shopping") if present.
+// Do not target .fixed/.overlay/.modal - they match nav/sidebar and stay in DOM.
 Cypress.Commands.add('dismissModal', () => {
   cy.get('body').then(($body) => {
-    // Check for welcome modal with "Start Shopping" button first
-    if ($body.text().includes('Start Shopping')) {
+    const $btn = $body.find('button, a, [role="button"]').filter(function () {
+      return Cypress.$(this).text().includes('Start Shopping')
+    }).first()
+    if ($btn.length) {
       cy.log('Dismissing welcome modal with "Start Shopping"')
-      cy.contains('Start Shopping').click({ force: true })
-      cy.contains('Start Shopping').should('not.exist')
-    }
-    // Check for modal overlay (clicking outside to close)
-    else if ($body.find('[role="button"][tabindex="0"]').length > 0) {
-      cy.log('Dismissing modal overlay by clicking outside')
-      cy.get('[role="button"][tabindex="0"]').first().click({ force: true })
-      cy.get('[role="button"][tabindex="0"]').should('not.exist')
-    }
-    // Check for any modal with close button
-    else if ($body.find('[aria-label*="close"], [aria-label*="Close"], .close, .modal-close').length > 0) {
-      cy.log('Dismissing modal with close button')
-      cy.get('[aria-label*="close"], [aria-label*="Close"], .close, .modal-close').first().click({ force: true })
-      cy.get('[aria-label*="close"], [aria-label*="Close"], .close, .modal-close').should('not.exist')
-    }
-    // Check for any overlay that might be blocking
-    else if ($body.find('.fixed, .overlay, .modal').length > 0) {
-      cy.log('Dismissing generic modal/overlay')
-      cy.get('.fixed, .overlay, .modal').first().click({ force: true })
-      cy.get('.fixed, .overlay, .modal').should('not.exist')
-    }
-    else {
-      cy.log('No modal detected - continuing')
+      cy.wrap($btn).click({ force: true })
+      cy.contains('Start Shopping', { timeout: 5000 }).should('not.exist')
+    } else {
+      cy.log('No welcome modal - continuing')
     }
   })
 })

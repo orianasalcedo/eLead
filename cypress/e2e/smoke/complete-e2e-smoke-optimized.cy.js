@@ -15,10 +15,16 @@ const { lookingForMoreOptionsHelpers } = require('../../support/looking-for-more
 const { footerHelpers } = require('../../support/footer-helpers')
 
 describe('Complete E2E Smoke Test Suite - Optimized', () => {
-  // Handle uncaught exceptions from React
+  // Handle uncaught exceptions from React and expected auth/network errors
   before(() => {
     cy.on('uncaught:exception', (err) => {
       if (err.message.includes('Minified React error')) {
+        return false
+      }
+      if (err.message.includes('Request failed with status code 401')) {
+        return false
+      }
+      if (err.message.includes('status code 401')) {
         return false
       }
       return true
@@ -28,20 +34,29 @@ describe('Complete E2E Smoke Test Suite - Optimized', () => {
   })
 
   describe('Store Frontend Authentication Flow', () => {
+    it('should complete sign up, validate user name in header, log out, then login with invalid and valid user', () => {
+      cy.log('🚀 Sign-up → validate name → log out → login (invalid + valid)')
+
+      userJourneyActions.signUpFromHomepage({ password: 'Testing2!' })
+
+      cy.log('✅ Sign-up successful - validating registered user name top right')
+      userJourneyActions.validateRegisteredUserAndLogout('Test User')
+
+      cy.log('📋 Proceeding with login flow: invalid then valid user')
+      cy.fixture('test-user').then((testData) => {
+        userJourneyActions.completeUserJourney(testData)
+      })
+
+      cy.log('✅ Full auth flow complete: sign up, logout, invalid login, valid login')
+    })
+
     it('should complete full user journey from homepage to authenticated store access', () => {
       cy.log('🚀 Starting complete user journey test')
 
-      // Load test data from fixture
       cy.fixture('test-user').then((testData) => {
         cy.log('📋 Test data loaded from fixture')
-        
-        // Execute complete user journey using actions
         userJourneyActions.completeUserJourney(testData)
-        
         cy.log('✅ Complete user journey successful!')
-        cy.log('✅ User authenticated and redirected to homepage')
-        cy.log('✅ Homepage content rendering verified')
-        cy.log('✅ Ready to continue with store navigation and shopping flow')
       })
     })
 

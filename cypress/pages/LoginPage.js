@@ -9,17 +9,30 @@ class LoginPage {
     cy.visit('/login')
   }
 
-  // Form Elements
+  // Tab: click Log In tab (tab text is "Log In")
+  clickLogInTab() {
+    cy.contains('Log In').first().click()
+  }
+
+  // Form Elements: scope to the LOG IN form (has "Log in" submit, not "Register")
+  _getLoginForm() {
+    return cy.get('form').filter((i, form) => {
+      const $form = Cypress.$(form)
+      const $btn = $form.find('button[type="submit"]')
+      return $btn.length > 0 && /log\s*in/i.test($btn.text()) && !/register/i.test($btn.text())
+    }).first()
+  }
+
   getEmailInput() {
-    return cy.get('input[type="email"]')
+    return this._getLoginForm().find('#email, input[name="email"]').first()
   }
 
   getPasswordInput() {
-    return cy.get('input[type="password"]')
+    return this._getLoginForm().find('input[type="password"], input[name="password"]').first()
   }
 
   getLoginButton() {
-    return cy.get('button[type="submit"]')
+    return this._getLoginForm().find('button[type="submit"]')
   }
 
   // Messages
@@ -31,13 +44,15 @@ class LoginPage {
     return cy.get('[data-cy="user-menu"]')
   }
 
-  // Atomic Actions
+  // Atomic Actions (break chain to avoid "subject detached" when app re-renders after clear)
   fillEmail(email) {
-    this.getEmailInput().clear().type(email)
+    this.getEmailInput().clear()
+    this.getEmailInput().type(email)
   }
 
   fillPassword(password) {
-    this.getPasswordInput().clear().type(password, { log: false })
+    this.getPasswordInput().clear()
+    this.getPasswordInput().type(password, { log: false })
   }
 
   clickLoginButton() {

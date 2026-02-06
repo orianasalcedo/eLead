@@ -1,7 +1,7 @@
 {
   "testUser": {
     "email": "oriana.salcedo@rootstrap.com",
-    "password": "Testing2!",
+    "password": "Testing1!",
     "name": "Oriana Salcedo"
   },
   "invalidUser": {

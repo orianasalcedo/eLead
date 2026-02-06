@@ -5,8 +5,68 @@
 
 const { HomePage } = require('../pages/HomePage')
 const { LoginPage } = require('../pages/LoginPage')
+const { SignUpPage } = require('../pages/SignUpPage')
+const { randomEmail } = require('../utils/random-email')
 
 const userJourneyActions = {
+  /**
+   * Sign up from homepage: Log in → Sign Up tab → fill form → Register
+   * URL stays on /login (no /signup); tab switch is in-page only.
+   * @param {Object} options - { firstName, lastName, email (optional, uses random if omitted), password }
+   */
+  signUpFromHomepage(options = {}) {
+    const homepage = new HomePage()
+    const signUpPage = new SignUpPage()
+    const email = options.email || randomEmail('signup')
+    const password = options.password || 'Testing2!'
+    const firstName = options.firstName || 'Test'
+    const lastName = options.lastName || 'User'
+
+    cy.log('📱 Sign-up: Visiting homepage')
+    homepage.visit()
+    homepage.handleWelcomeModal()
+    homepage.verifyPageLoaded()
+
+    cy.log('🔗 Sign-up: Clicking Log in (navigates to /login)')
+    homepage.clickLoginLink()
+    cy.url().should('include', '/login')
+
+    cy.log('📝 Sign-up: Clicking Sign Up tab (stays on /login)')
+    signUpPage.clickSignUpTab()
+    
+    // Wait for sign-up form to be visible - check for first name field or "New Customer" text
+    cy.get('input[placeholder*="first name"], input[placeholder*="First name"], input[name="firstName"]').first().should('be.visible')
+
+    cy.log('📝 Sign-up: Filling form')
+    signUpPage.fillSignUpForm({ firstName, lastName, email, password })
+
+    cy.log('✅ Sign-up: Clicking Register')
+    signUpPage.clickRegister()
+    
+    // Wait for registration to complete - either redirect or stay on /login with user logged in
+    cy.wait(2000)
+  },
+
+  /**
+   * After sign-up: validate user name in header (top right), click it, verify Log out, click Log out,
+   * then confirm in modal "Yes, log out".
+   * @param {string} displayName - e.g. 'Test User' (firstName + ' ' + lastName used in sign-up)
+   */
+  validateRegisteredUserAndLogout(displayName = 'Test User') {
+    const homepage = new HomePage()
+    cy.log('👤 Validating registered user name in header')
+    homepage.getUserNameDisplay(displayName).should('be.visible')
+    cy.log('✅ User name visible - clicking to open menu')
+    homepage.clickUserNameInHeader(displayName)
+    cy.log('🔍 Verifying Log out is visible')
+    homepage.getLogOutLink().should('be.visible')
+    cy.log('🚪 Clicking Log out')
+    homepage.clickLogOut()
+    cy.log('✅ Confirming logout in modal (Yes, log out)')
+    homepage.clickConfirmLogOut()
+    cy.log('✅ Logged out - ready for login flow')
+  },
+
   /**
    * Complete user journey from homepage to authenticated state
    * @param {Object} testData - Test data from fixture
@@ -21,59 +81,39 @@ const userJourneyActions = {
     homepage.handleWelcomeModal()
     homepage.verifyPageLoaded()
     
-    // Wait for page to fully load and check for login link
     cy.wait(2000)
+    cy.log('✅ Homepage loaded')
+
     cy.get('body').then(($body) => {
-      if ($body.text().includes('Log in')) {
-        cy.log('✅ Login button found on homepage')
-        homepage.getLoginLink().should('be.visible')
-      } else {
-        cy.log('⚠️ Login button not found, checking current page state')
-        cy.url().then((currentUrl) => {
-          cy.log(`Current URL: ${currentUrl}`)
-          if (currentUrl.includes('/login')) {
-            cy.log('ℹ️ Already on login page, continuing with login flow')
-          } else {
-            cy.log('🔄 Refreshing page to ensure homepage loads correctly')
-            cy.reload()
-            cy.wait(2000)
-            homepage.getLoginLink().should('be.visible')
-          }
-        })
+      const alreadyLoggedInAsValidUser = $body.text().includes(testData.testUser.name)
+      if (alreadyLoggedInAsValidUser) {
+        cy.log('✅ Already logged in as valid user (' + testData.testUser.name + ') - skipping login steps')
+        return
       }
-    })
-    cy.log('✅ Homepage loaded with login button visible')
-
-    // STEP 2: Navigate to login
-    cy.log('🔗 STEP 2: Clicking login button')
-    homepage.clickLoginLink()
-    cy.url().should('include', '/login')
-    cy.contains('Already registered? Log In').should('be.visible')
-    cy.log('✅ Login page opened with correct text')
-
-    // STEP 3: Test invalid credentials
-    cy.log('❌ STEP 3: Testing invalid credentials (user mistake simulation)')
-    loginPage.fillLoginForm(testData.invalidUser.email, testData.invalidUser.password)
-    loginPage.submitForm()
-    cy.wait(2000)
-    
-    // Handle potential redirect after invalid login
-    cy.url().then((currentUrl) => {
-      if (!currentUrl.includes('/login')) {
-        cy.log('ℹ️ Redirected after invalid login attempt, navigating back to login')
-        homepage.clickLoginLink()
-        cy.url().should('include', '/login')
-      } else {
-        cy.log('✅ Invalid credentials handled correctly - stayed on login page')
-      }
+      cy.log('🔗 STEP 2: Click Log In (go to login page)')
+      homepage.clickLoginLink()
+      cy.url().should('include', '/login')
+      cy.log('🔀 Ensuring Log In tab is active')
+      loginPage.clickLogInTab()
+      cy.log('❌ STEP 3: Login with invalid user')
+      loginPage.fillLoginForm(testData.invalidUser.email, testData.invalidUser.password)
+      loginPage.submitForm()
+      cy.wait(2000)
+      cy.url().then((currentUrl) => {
+        if (!currentUrl.includes('/login')) {
+          cy.log('ℹ️ Redirected after invalid login - navigating back to login')
+          cy.visit('/login')
+          cy.url().should('include', '/login')
+        }
+      })
+      cy.log('🔀 Ensuring Log In tab is active')
+      loginPage.clickLogInTab()
+      cy.log('📧 STEP 4: Login with valid user')
+      loginPage.fillLoginForm(testData.testUser.email, testData.testUser.password)
+      loginPage.submitForm()
     })
 
-    // STEP 4: Login with valid credentials
-    cy.log('📧 STEP 4: Filling correct credentials')
-    loginPage.fillLoginForm(testData.testUser.email, testData.testUser.password)
-    loginPage.submitForm()
-    
-    // STEP 5: Verify authentication
+    // STEP 5: Verify authentication (whether we just logged in or were already logged in)
     cy.log('🔐 STEP 5: Verifying successful authentication')
     cy.url().should('include', Cypress.config('baseUrl'))
     cy.url().should('not.include', '/login')

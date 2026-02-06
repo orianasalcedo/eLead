@@ -36,6 +36,21 @@ class HomePage {
     return cy.contains('Oriana Salcedo')
   }
 
+  /** Element that displays the given user name (e.g. in header top right; fallback body) */
+  getUserNameDisplay(userName) {
+    return cy.get('body').contains(userName).first()
+  }
+
+  /** Log out link/button (case insensitive) */
+  getLogOutLink() {
+    return cy.contains(/log out/i).first()
+  }
+
+  /** Confirm log out in modal: "Yes, log out" (button or link) */
+  getConfirmLogOutButton() {
+    return cy.contains(/yes,?\s*log out/i).first()
+  }
+
   getNavigationElement() {
     return cy.get('body > div > div.flex.min-h-screen.flex-col.items-center.justify-between > div > header > div > nav > div:nth-child(1) > ul')
   }
@@ -54,8 +69,21 @@ class HomePage {
     this.getLoginLink().click({ force: true })
   }
 
+  clickUserNameInHeader(userName) {
+    this.getUserNameDisplay(userName).should('be.visible').click()
+  }
+
+  clickLogOut() {
+    this.getLogOutLink().should('be.visible').click()
+  }
+
+  /** Confirm logout in modal: click "Yes, log out" */
+  clickConfirmLogOut() {
+    this.getConfirmLogOutButton().should('be.visible').click()
+  }
+
   handleWelcomeModal() {
-    cy.log('Skipping welcome modal handling - continuing with test')
+    cy.handleWelcomeModal()
   }
 
   // Verification methods (for actions to use)

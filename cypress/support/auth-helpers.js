@@ -69,6 +69,7 @@ const authHelpers = {
     
     homepage.clickLoginLink()
     cy.url().should('include', '/login')
+    loginPage.clickLogInTab()
     
     loginPage.fillLoginForm(testData.testUser.email, testData.testUser.password)
     loginPage.submitForm()
