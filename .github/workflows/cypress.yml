@@ -29,8 +29,9 @@ jobs:
       - name: Run smoke tests
         run: npm run test:smoke
         env:
-          BASE_URL: ${{ secrets.BASE_URL || 'http://localhost:3000' }}
-          API_URL: ${{ secrets.API_URL || 'http://localhost:3000/api' }}
+          # Default to QA URL so smoke tests run without secrets (no local server in CI)
+          BASE_URL: ${{ secrets.BASE_URL || 'https://tienda1.qa.eleaddev.com' }}
+          API_URL: ${{ secrets.API_URL || 'https://tienda1.qa.eleaddev.com/api' }}
 
       - name: Upload test artifacts
         uses: actions/upload-artifact@v4
