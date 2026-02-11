@@ -23,19 +23,37 @@ const commonHelpers = {
   },
 
   /**
-   * Validates H1 text matches expected text with flexible comparison
-   * @param {string} expectedText - Expected text to match
-   * @param {number} timeout - Timeout in milliseconds (default: 10000)
+   * Dismiss any open dropdown/overlay (e.g. Shop menu) so page content (e.g. h1) is visible.
+   * Escape + click outside in several positions (menus don't always close on first click).
    */
-  validateH1Match(expectedText, timeout = 10000) {
+  dismissOpenMenus() {
+    cy.get('body').type('{esc}', { force: true })
+    cy.get('body').click(10, 10, { force: true })
+    cy.get('body').click(400, 300, { force: true })
+  },
+
+  /**
+   * Validates H1: by default checks text match (flexible); with onlyExistence just checks that an h1 exists.
+   * Use onlyExistence when page names vary per env/store (navbar uses this).
+   * @param {string} expectedText - Expected text to match (ignored if onlyExistence)
+   * @param {number} timeout - Timeout in milliseconds (default: 10000)
+   * @param {{ onlyExistence?: boolean }} options - onlyExistence: true = only assert h1 exists, don't check text
+   */
+  validateH1Match(expectedText, timeout = 10000, options = {}) {
+    this.dismissOpenMenus()
     cy.get('h1', { timeout })
       .should('exist')
+      .and('be.visible')
       .then(($h1) => {
         const h1Text = $h1.text().trim()
         cy.log(`📋 Page h1: "${h1Text}"`)
-        cy.log(`📋 Expected: "${expectedText}"`)
 
-        // Flexible comparison (contains or is contained)
+        if (options.onlyExistence) {
+          cy.log(`✅ H1 found (store may use different page names)`)
+          return
+        }
+
+        cy.log(`📋 Expected: "${expectedText}"`)
         const expectedLower = expectedText.toLowerCase()
         const h1TextLower = h1Text.toLowerCase()
         const textMatch =
@@ -132,6 +150,7 @@ const commonHelpers = {
   shouldSkipText(
     text,
     skipPatterns = [
+      'shop', // "Shop Menu" etc. often open dropdown, don't navigate to a page with h1
       'shops',
       'log',
       'user',

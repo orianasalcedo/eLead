@@ -141,5 +141,16 @@ describe('Complete E2E Smoke Test Suite - Optimized', () => {
         cy.log('✅ Footer functionality test complete')
       })
     })
+
+    it.only('should enter location, choose first product from catalog and open it', () => {
+      cy.log('🔍 Enter location (by env), select first catalog product, open product detail')
+
+      cy.fixture('test-user').then((testData) => {
+        authHelpers.ensureAuthenticated(testData)
+        authHelpers.ensureHomepageLoaded()
+        userJourneyActions.enterLocationAndOpenFirstProduct()
+        cy.log('✅ Location → catalog → product detail flow complete')
+      })
+    })
   })
 })

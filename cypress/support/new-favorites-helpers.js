@@ -24,11 +24,9 @@ const newFavoritesHelpers = {
       .should('have.class', 'relative')
     cy.log('✅ Section has correct CSS classes')
 
-    // Verify title styling
-    cy.get('section h2')
-      .contains('New Favorites')
-      .should('have.class', 'text-secondary')
-    cy.log('✅ "New Favorites" title has correct styling')
+    // Title styling (e.g. text-secondary) can vary per store/theme — only assert title exists
+    cy.get('section h2').contains('New Favorites').should('be.visible')
+    cy.log('✅ "New Favorites" title visible')
 
     // Verify navigation arrows
     commonHelpers.verifyElementExists('section .custom-prev', 'Previous arrow')

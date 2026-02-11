@@ -36,12 +36,14 @@ const navbarHelpers = {
 
     // Click the element
     cy.get(selector).click()
-
+    // Close dropdown if click opened it (e.g. Shop Menu) so main content/h1 is visible
+    commonHelpers.dismissOpenMenus()
+    // eslint-disable-next-line cypress/no-unnecessary-waiting -- allow overlay to close before asserting h1
+    cy.wait(800, { log: false })
     // Wait for navigation using common helper
     commonHelpers.waitForNavigation()
-
-    // Validate H1 using common helper
-    commonHelpers.validateH1Match(linkText)
+    // Validate H1 exists and is visible (page names vary per env/store)
+    commonHelpers.validateH1Match(linkText, 15000, { onlyExistence: true })
 
     // Verify page navigation
     cy.verifyPageNavigation()

@@ -9,7 +9,7 @@ let baseUrl
 if (environment === 'qa') {
   baseUrl = process.env.BASE_URL || 'https://tienda1.qa.eleaddev.com'
 } else if (environment === 'staging') {
-  baseUrl = process.env.BASE_URL || 'https://aya.stg.eleaddev.com'
+  baseUrl = process.env.BASE_URL || 'https://usc.stg.eleaddev.com'
 } else if (environment === 'production') {
   baseUrl = process.env.PRODUCTION_URL || 'https://example.com'
 } else {
@@ -34,6 +34,14 @@ module.exports = defineConfig({
     chromeWebSecurity: false, // Allow Chrome to handle security
     setupNodeEvents(on, config) {
       require('cypress-mochawesome-reporter/plugin')(on)
+
+      // Location name / URL identifier per environment
+      // QA: path /cleveland-hospital | STG: /shop?location=Keck%20Medicine%20of%20USC&location_key=KECK
+      const envName = process.env.CYPRESS_ENV || 'qa'
+      config.env.defaultLocationName =
+        envName === 'staging' ? 'Keck Medicine of USC' : 'Cleveland Hospital'
+      config.env.defaultLocationSlug =
+        envName === 'staging' ? 'shop?location=Keck' : 'cleveland-hospital'
 
       // Xray Integration - Temporarily disabled due to plugin issues
       // const xrayPlugin = require('@csvtuda/cypress-xray-plugin')

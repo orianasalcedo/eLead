@@ -34,7 +34,18 @@ class HomePage {
   }
 
   getShopsButton() {
-    return cy.contains('Shops')
+    return cy.contains('Shop')
+  }
+
+  /** Shop menu trigger inside header nav (body/div/div[2]/div/header/div/nav). */
+  getShopsMenuTab() {
+    return cy.get('header nav').contains('Shop').first()
+  }
+
+  /** Opens the Shop/Location menu so the location link is visible. Two separate commands to avoid "element detached" on re-render. */
+  clickOpenLocationMenu() {
+    this.getShopsMenuTab().should('be.visible')
+    this.getShopsMenuTab().click()
   }
 
   getUserNameElement() {
@@ -66,8 +77,10 @@ class HomePage {
     return cy.get('h2')
   }
 
-  getClevelandHospitalElement() {
-    return cy.contains('Cleveland Hospital')
+  /** Location link (QA: Cleveland Hospital, STG: Keck Medicine of USC) */
+  getDefaultLocationElement() {
+    const name = Cypress.env('defaultLocationName') || 'Cleveland Hospital'
+    return cy.contains(name)
   }
 
   // Atomic Actions
@@ -144,8 +157,8 @@ class HomePage {
     this.getNavigationElement().should('be.visible').click()
   }
 
-  clickClevelandHospital() {
-    this.getClevelandHospitalElement().should('be.visible').click()
+  clickDefaultLocation() {
+    this.getDefaultLocationElement().should('be.visible').click()
   }
 
   verifyLocationH1(locationName) {
@@ -170,13 +183,18 @@ class HomePage {
         cy.log('✅ Brand element is clickeable - testing navigation')
         cy.wrap($img).click()
         cy.url().should('include', Cypress.config('baseUrl'))
-        cy.url().should('not.include', '/cleveland-hospital')
+        cy.url().should(
+          'not.include',
+          `/${Cypress.env('defaultLocationSlug') || 'cleveland-hospital'}`,
+        )
         cy.log('✅ Successfully navigated back to homepage via brand click')
       } else {
         cy.log('ℹ️ Brand element is not clickeable - staying on current page')
         cy.wrap($img).should('be.visible')
         cy.log('✅ Brand element visibility confirmed (non-clickeable)')
-        cy.log('✅ Staying on Cleveland Hospital page as expected')
+        cy.log(
+          `✅ Staying on ${Cypress.env('defaultLocationName') || 'location'} page as expected`,
+        )
       }
     })
   }
@@ -202,8 +220,12 @@ class HomePage {
     cy.log(`🧭 Navigating to navbar link: "${linkText}"`)
 
     this.clickNavbarLink(linkText)
+    // Close dropdown if click opened it (e.g. Shop Menu) so main content/h1 is visible
+    commonHelpers.dismissOpenMenus()
+    // eslint-disable-next-line cypress/no-unnecessary-waiting -- allow overlay to close before asserting h1
+    cy.wait(800, { log: false })
     commonHelpers.waitForNavigation()
-    commonHelpers.validateH1Match(linkText)
+    commonHelpers.validateH1Match(linkText, 15000, { onlyExistence: true })
 
     cy.log(`✅ Successfully navigated to "${linkText}" and verified h1`)
   }

@@ -5,7 +5,10 @@
 
 const { HomePage } = require('../pages/HomePage')
 const { LoginPage } = require('../pages/LoginPage')
+const { ProductDetailPage } = require('../pages/ProductDetailPage')
+const { ShopPage } = require('../pages/ShopPage')
 const { SignUpPage } = require('../pages/SignUpPage')
+const { commonHelpers } = require('../support/common-helpers')
 const { randomEmail } = require('../utils/random-email')
 
 const userJourneyActions = {
@@ -145,15 +148,19 @@ const userJourneyActions = {
     homepage.clickNavigationElement()
     cy.log('✅ Header navigation element clicked successfully')
 
-    // STEP 8: Click on Cleveland Hospital
-    cy.log('🏥 STEP 8: Clicking on Cleveland Hospital')
-    homepage.clickClevelandHospital()
-    cy.log('✅ Cleveland Hospital clicked successfully')
+    // STEP 8: Open menu then click default location (QA: Cleveland Hospital, STG: Keck Medicine of USC)
+    const locationName = Cypress.env('defaultLocationName') || 'Cleveland Hospital'
+    cy.log('📂 STEP 8a: Opening Shop/Location menu (Enter on tab)')
+    homepage.clickOpenLocationMenu()
+    cy.contains(locationName).should('be.visible', { timeout: 8000 })
+    cy.log(`🏥 STEP 8b: Clicking on ${locationName}`)
+    homepage.clickDefaultLocation()
+    cy.log(`✅ ${locationName} clicked successfully`)
 
     // STEP 8.1: Verify location page loaded correctly
-    cy.log('📍 STEP 8.1: Verifying Cleveland Hospital location page')
-    homepage.verifyLocationH1('Cleveland Hospital')
-    cy.log('✅ Cleveland Hospital location page verified - h1 found')
+    cy.log(`📍 STEP 8.1: Verifying ${locationName} location page`)
+    homepage.verifyLocationH1(locationName)
+    cy.log(`✅ ${locationName} location page verified - h1 found`)
 
     // STEP 9: Test brand element clickability and navigation
     cy.log('🏢 STEP 9: Testing brand element clickability and navigation')
@@ -177,7 +184,10 @@ const userJourneyActions = {
         )
         cy.wrap($img).click()
         cy.url().should('include', Cypress.config('baseUrl'))
-        cy.url().should('not.include', '/cleveland-hospital')
+        cy.url().should(
+          'not.include',
+          `/${Cypress.env('defaultLocationSlug') || 'cleveland-hospital'}`,
+        )
         cy.log('✅ Successfully navigated back to homepage via brand click')
 
         // Continue with homepage verification
@@ -200,11 +210,11 @@ const userJourneyActions = {
         })
       } else {
         cy.log(
-          'ℹ️ Brand element is not clickeable - staying on Cleveland Hospital page',
+          `ℹ️ Brand element is not clickeable - staying on ${locationName} page`,
         )
         cy.wrap($img).should('be.visible')
         cy.log('✅ Brand element visibility confirmed (non-clickeable)')
-        cy.log('📍 Test completed on Cleveland Hospital page as expected')
+        cy.log(`📍 Test completed on ${locationName} page as expected`)
         cy.log('✅ User journey successfully completed on location page')
       }
     })
@@ -320,6 +330,39 @@ const userJourneyActions = {
     this.navigateAllNavbarPages(testData)
 
     cy.log('✅ Complete user journey with navbar navigation successful!')
+  },
+
+  /**
+   * From homepage: enter the default location (name by env), then choose first product from catalog and open it.
+   * Assumes caller has already loaded homepage (and optionally logged in).
+   */
+  enterLocationAndOpenFirstProduct() {
+    const homepage = new HomePage()
+    const shopPage = new ShopPage()
+    const locationName =
+      Cypress.env('defaultLocationName') || 'Cleveland Hospital'
+
+    cy.log('📂 Opening Shop/Location menu (Enter on tab)')
+    homepage.clickOpenLocationMenu()
+    cy.contains(locationName).should('be.visible', { timeout: 8000 })
+    cy.log(`🏥 Clicking location: ${locationName}`)
+    homepage.clickDefaultLocation()
+    homepage.verifyLocationH1(locationName)
+    cy.log(`✅ On ${locationName} catalog page`)
+
+    cy.log('🛒 Choosing first product from catalog and opening it')
+    shopPage.clickFirstCatalogProduct()
+    commonHelpers.waitForNavigation()
+    shopPage.verifyProductDetailPage()
+    cy.log('✅ Product detail page opened')
+
+    const productDetailPage = new ProductDetailPage()
+    productDetailPage.selectProductAttributesWhenPresent()
+    cy.log('✅ Product attributes (size/color/logo) selected when present')
+    productDetailPage.clickAddToCartWhenPresent()
+    cy.log('✅ Add to cart clicked when present')
+    productDetailPage.dismissAddToCartModalWhenPresent()
+    cy.log('✅ Add to cart modal dismissed when present')
   },
 }
 
